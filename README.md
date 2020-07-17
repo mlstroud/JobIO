@@ -1,68 +1,91 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# JobIO
 
-## Available Scripts
+#### Epicodus Capstone Project - Last Updated July 17th, 2020
 
-In the project directory, you can run:
+#### By _**Matt Stroud**_
 
-### `npm start`
+## Proposal
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+| Minimum Features |
+|------------------|
+| Users can register / sign in |
+| Users can search for jbs |
+| App will webscrape job boards for data |
+| Users can save applied jobs to pipeline |
+| Users can view all applied jobs |
+---
+|Tools, Frameworks, Libraries, Resources |
+|---------------------------------------|
+| FERN Stack |
+| Axios |
+| Cheerio |
+---
+|Stretch Goals |
+|--------------|
+| Clean, Responsive UI |
+| API Access |
+| Duplicate flagging |
+| Search Filtering |
+| Detailed statistics |
+| Hosting |
+---
+## Component Diagram
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+![Component diagram for tap room application.](https://raw.githubusercontent.com/mlstroud/JobIO/master/componentdiagram.png)
 
-### `npm test`
+## Setup/Installation Requirements
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Navigate to the parent directory you would like to store the project's directory in.
+```
+cd DIRECTORYNAME
+```
+2. Clone the repository from github, and navigate to its directory.
+```
+git clone https://github.com/mlstroud/JobIO.git
+cd merch-site
+```
+3. Navigate to client directory and install required dependencies.
+```
+cd client
+npm install
+```
+4. Navigate to server directory and install required dependencies.
+```
+cd server
+npm install
+```
+5. Start the server and client applications (you should still be in the server directory at this point).
+```
+npm start
+cd ..
+cd client
+npm start
+```
+> If the browser does not automatically launch, you can generally view it at https://localhost:3000
 
-### `npm run build`
+## Known Bugs
+ 
+## Support and contact details
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+_Have a bug or an issue with this application? [Open a new issue](https://github.com/mlstroud/JobIO/issues) here on GitHub._
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Technologies Used
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* React
+*
+* JavaScript
+* JSX
+* Axios
+* Cheerio
+* Express
+* Firestore
+* Material-UI
+* HTML
+* CSS
+* Git
 
-### `npm run eject`
+### License
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+This software is licensed under the MIT license.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Copyright © 2020 **_Matt Stroud_**
