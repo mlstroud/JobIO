@@ -8,10 +8,11 @@ function Splash() {
     background-color: #0E5A8A;
     width: 100%;
     border-radius: 0;
-    min-height: 50vh;
+    min-height: 80vh;
     margin: 0;
     text-align: center;
     color: white;
+    padding: 200px 0;
   `;
 
   const Info = styled(Jumbotron)`
