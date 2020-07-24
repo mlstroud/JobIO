@@ -8,7 +8,6 @@
 
 | Minimum Features |
 |------------------|
-| Users can register / sign in |
 | Users can search for jbs |
 | App will webscrape job boards for data |
 | Users can save applied jobs to pipeline |
@@ -22,6 +21,7 @@
 ---
 |Stretch Goals |
 |--------------|
+| Authentication / User Specific Data |
 | Clean, Responsive UI |
 | API Access |
 | Duplicate flagging |
