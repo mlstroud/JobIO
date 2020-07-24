@@ -5,7 +5,7 @@ import { Jumbotron, Button } from "reactstrap";
 function Splash() {
 
   const Hero = styled(Jumbotron)`
-    background-color: #303f9f;
+    background-color: #0E5A8A;
     width: 100%;
     border-radius: 0;
     min-height: 50vh;
@@ -15,9 +15,11 @@ function Splash() {
   `;
 
   const Info = styled(Jumbotron)`
-    background-color: #303f9f;
+    background-color: #48AFF0;
     border-radius: 0;
     width: 100%;
+    text-align: center;
+    color: white;
     margin: 0;
   `;
 
@@ -29,7 +31,8 @@ function Splash() {
         <Button color="warning">Call To Action Here</Button>
       </Hero>
       <Info>
-        Test
+        <h2>What is JobIO?</h2>
+        <p>Stuff stuff stuff</p>
       </Info>
     </React.Fragment>
   );
