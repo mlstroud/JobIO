@@ -5,9 +5,12 @@ class PageControl extends React.Component {
     super(props);
   }
 
+
   render() {
+    let currentPage = null;
+
     return (
-      "PageControl"
+      { currentPage }
     );
   }
 }
