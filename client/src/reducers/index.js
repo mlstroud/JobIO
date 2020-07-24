@@ -1,4 +1,4 @@
-import manageApplicationReducer from "./manage-application-reducer"l
+import manageApplicationReducer from "./manage-application-reducer";
 import searchReducer from "./searching-reducer";
 import { combineReducers } from "redux";
 

@@ -8,7 +8,7 @@ function App() {
   return (
     <React.Fragment>
       <Header />
-      <Splash />
+      <PageControl />
       <Footer />
     </React.Fragment>
   );

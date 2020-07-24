@@ -1,4 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
+import Splash from "./Splash";
+import Search from "./Search";
 
 class PageControl extends React.Component {
   constructor(props) {
@@ -7,12 +10,25 @@ class PageControl extends React.Component {
 
 
   render() {
-    let currentPage = null;
+    let currentPage = <Splash />
+
+    if (this.props.isSearching) {
+      currentPage = <Search />
+    }
 
     return (
-      { currentPage }
+      <React.Fragment>
+        {currentPage}
+      </React.Fragment>
     );
   }
 }
 
-export default PageControl;
+const mapStateToProps = state => {
+  return {
+    isEditing: state.isEditing,
+    isSearching: state.isSearching
+  }
+};
+
+export default connect(mapStateToProps)(PageControl);

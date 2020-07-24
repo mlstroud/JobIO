@@ -1,14 +1,36 @@
 import React from "react";
 import { Navbar, Nav, NavbarBrand, NavItem, NavLink } from "reactstrap";
 import styled from "styled-components";
+import { connect } from "react-redux";
 
-function Header() {
+function Header(props) {
 
   const FixedNav = styled.div`
     top: 0;
     position: fixed;
     width: 100%;
   `;
+
+  function viewPage(page) {
+
+    const { dispatch } = props
+    let actionType;
+
+    switch (page) {
+      case "Search":
+        console.log(1);
+        actionType = "TOGGLE_SEARCH";
+      default:
+    }
+
+    console.log(page);
+
+    let action = {
+      type: actionType
+    }
+    console.log(action);
+    dispatch(action);
+  }
 
   return (
     <React.Fragment>
@@ -17,16 +39,16 @@ function Header() {
           <NavbarBrand>JobIO</NavbarBrand>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink href="#">Home</NavLink>
+              <NavLink href="#" onClick={() => viewPage("Home")}>Home</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#">Dashboard</NavLink>
+              <NavLink href="#" onClick={() => viewPage("Dashboard")}>Dashboard</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#">Applications</NavLink>
+              <NavLink href="#" onClick={() => viewPage("Applications")}>Applications</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#">Search</NavLink>
+              <NavLink href="#" onClick={() => viewPage("Search")}>Search</NavLink>
             </NavItem>
           </Nav>
         </Navbar>
@@ -35,4 +57,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default connect()(Header);
