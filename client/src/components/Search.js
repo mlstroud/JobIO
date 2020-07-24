@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Jumbotron, Button, InputGroup, InputGroupAddon, Label, Input } from "reactstrap";
 import styled from "styled-components";
 import { useState } from "react";
+const axios = require("axios");
 
 const SearchContainer = styled(Container)`
   padding-top: 200px;
@@ -12,9 +13,10 @@ function Search() {
   const [stuff, doStuff] = useState(null);
   let searchResults = [];
 
-  function getSearchResults() {
-
-    doStuff("lol");
+  async function getSearchResults() {
+    const pageData = await axios.get(`https://localhost:5000/search`);
+    console.log(pageData.data);
+    doStuff(pageData.data);
   }
 
   return (
