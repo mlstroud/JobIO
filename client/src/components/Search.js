@@ -10,6 +10,7 @@ function Search() {
   return (
     <React.Fragment>
       <SearchContainer>
+        <h2>Search for jobs</h2>
         <Jumbotron>
           <InputGroup>
             <Input type="text" placeholder="Software Engineer..." />
