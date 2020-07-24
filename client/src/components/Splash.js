@@ -8,7 +8,7 @@ function Splash() {
     background-color: #0E5A8A;
     width: 100%;
     border-radius: 0;
-    min-height: 80vh;
+    min-height: 60vh;
     margin: 0;
     text-align: center;
     color: white;
