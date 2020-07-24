@@ -4,9 +4,15 @@ import styled from "styled-components";
 
 function Header() {
 
+  const FixedNav = styled.div`
+    top: 0;
+    position: fixed;
+    width: 100%;
+  `;
+
   return (
     <React.Fragment>
-      <div>
+      <FixedNav>
         <Navbar className="navbar-dark bg-dark" expand="md">
           <NavbarBrand>JobIO</NavbarBrand>
           <Nav className="mr-auto" navbar>
@@ -24,7 +30,7 @@ function Header() {
             </NavItem>
           </Nav>
         </Navbar>
-      </div>
+      </FixedNav>
     </React.Fragment>
   );
 }
