@@ -9,7 +9,7 @@ const cheerio = require('cheerio');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-const searchRouter = require('./routes/search');
+var searchRouter = require('./routes/search');
 
 var app = express();
 

@@ -14,9 +14,14 @@ function Search() {
   let searchResults = [];
 
   async function getSearchResults() {
-    const pageData = await axios.get(`https://localhost:5000/search`);
-    console.log(pageData.data);
-    doStuff(pageData.data);
+    axios.get(`http://localhost:5000/search`)
+      .then((response) => {
+        console.log(response.data);
+        doStuff(response.data);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      })
   }
 
   return (
