@@ -8,6 +8,7 @@ function Footer() {
     padding 50px;
     background-color: #182026;
     color: white;
+    height: 200px;
   `;
 
   const ListContainer = styled.div`
