@@ -2,8 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 import Splash from "./Splash";
 import Search from "./Search";
+import styled from "styled-components";
+
+const PageWrapper = styled.div`
+  top: 100px;
+`;
 
 class PageControl extends React.Component {
+
   constructor(props) {
     super(props);
   }
@@ -18,7 +24,9 @@ class PageControl extends React.Component {
 
     return (
       <React.Fragment>
-        {currentPage}
+        <PageWrapper>
+          {currentPage}
+        </PageWrapper>
       </React.Fragment>
     );
   }

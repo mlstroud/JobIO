@@ -1,8 +1,20 @@
 import React from "react";
+import Job from "./Job";
 
-function JobList() {
+function JobList(props) {
+
+  const { jobList } = props;
+
   return (
-    "JobList"
+    jobList.map((job, index) => {
+      return <Job
+        key={index + job.title}
+        url={job.url}
+        title={job.title}
+        company={job.company}
+        location={job.location}
+        summary={job.summary} />
+    })
   );
 }
 
