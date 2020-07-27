@@ -5,6 +5,7 @@ import Search from "./Search";
 import Applications from "./Applications";
 import Dashboard from "./Dashboard";
 import ManageApplication from "./ManageApplication";
+import ApplicationDetail from "./ApplicationDetail";
 import styled from "styled-components";
 import { withFirestore } from "react-redux-firebase";
 
@@ -17,6 +18,9 @@ class PageControl extends React.Component {
   constructor(props) {
     super(props);
     console.log(props);
+    this.state = {
+      selected: null
+    }
   }
 
   handleEditingApplication() {
@@ -24,8 +28,8 @@ class PageControl extends React.Component {
   }
 
   handleSelectingApplication = (id) => {
-    //const { dispatch } = this.props;
-    this.props.firestore.get({ collection: "tickets", doc: id })
+    const { dispatch } = this.props;
+    this.props.firestore.get({ collection: "applications", doc: id })
       .then((application) => {
         const firestoreApplication = {
           title: application.get("title"),
@@ -37,10 +41,10 @@ class PageControl extends React.Component {
         };
 
         let action = {
-          type: "SELECT_TICKET",
+          type: "SELECT_APPLICATION",
           application: firestoreApplication
         }
-        this.props.dispatch(action)
+        dispatch(action)
       });
   }
 
@@ -59,11 +63,16 @@ class PageControl extends React.Component {
   render() {
     let currentPage;
 
+
     if (this.props.isEditing) {
+      console.log(this.state.selected);
       currentPage = <ManageApplication
         onEditApplication={this.handleEditingApplication}
         application={this.props.selectedApplication}
       />
+    } else if (this.props.selectedApplication !== null) {
+      currentPage = <ApplicationDetail
+        application={this.props.selectedApplication} />
     } else {
       switch (window.location.pathname) {
         case "/search":

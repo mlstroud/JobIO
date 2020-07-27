@@ -4,8 +4,7 @@ import { Button } from "reactstrap";
 function Application(props) {
 
   function clickEditButton() {
-    props.onSelectApplication(props.id)
-    props.onClickEdit();
+    props.onSelectApplication(props.id);
   }
 
   return (
