@@ -20,12 +20,14 @@ router.get('/', async function (req, res, next) {
   $(".jobsearch-SerpJobCard").each((i, elem) => {
     scrapeData.push({
       title: $(elem).find(".title").text(),
+      url: "https://www.indeed.com" + $(elem).find(".title").find("a").attr("href"),
       company: $(elem).find(".company").text(),
       location: $(elem).find(".location").text(),
       summary: $(elem).find(".summary").text()
     });
   })
 
+  console.log(scrapeData);
   res.send(scrapeData);
 });
 
