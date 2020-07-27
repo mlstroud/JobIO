@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Splash from "./Splash";
 import Search from "./Search";
 import Applications from "./Applications";
+import Dashboard from "./Dashboard";
 import styled from "styled-components";
 
 const PageWrapper = styled.div`
@@ -17,12 +18,17 @@ class PageControl extends React.Component {
 
 
   render() {
-    let currentPage = <Splash />
+    let currentPage;
 
-    if (this.props.isSearching) {
-      currentPage = <Search />
-    } else if (this.props.viewingApplications) {
-      currentPage = <Applications />
+    switch (window.location.pathname) {
+      case "/search":
+        currentPage = <Search />
+        break;
+      case "/applications":
+        currentPage = <Applications />
+        break;
+      default:
+        currentPage = <Splash />
     }
 
     return (

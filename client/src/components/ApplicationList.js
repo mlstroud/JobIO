@@ -28,12 +28,6 @@ function ApplicationList() {
         })}
       </React.Fragment>
     );
-  } else if (isEmpty(applications)) {
-    return (
-      <React.Fragment>
-        <h3>You have no applications</h3>
-      </React.Fragment>
-    );
   } else {
     return (
       <React.Fragment>

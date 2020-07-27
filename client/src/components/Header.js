@@ -49,10 +49,10 @@ function Header(props) {
               <NavLink href="#" onClick={() => viewPage("Dashboard")}>Dashboard</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#" onClick={() => viewPage("Applications")}>Applications</NavLink>
+              <NavLink href="/applications" onClick={() => viewPage("Applications")}>Applications</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="#" onClick={() => viewPage("Search")}>Search</NavLink>
+              <NavLink href="/search" onClick={() => viewPage("Search")}>Search</NavLink>
             </NavItem>
           </Nav>
         </Navbar>
