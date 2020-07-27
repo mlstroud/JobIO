@@ -17,6 +17,16 @@ function Job(props) {
     float: right;
   `;
 
+  function buttonClickHandler() {
+    props.addJobToFirestore({
+      title: props.title,
+      company: props.company,
+      location: props.location,
+      summary: props.summary,
+      stage: "applied"
+    });
+  }
+
   return (
     <React.Fragment>
       <JobCard>
@@ -29,7 +39,7 @@ function Job(props) {
             {props.summary.split(".").map((sentence) => { return sentence + "\n"; })}
           </CardText>
           <ButtonDiv>
-            <Button color="primary">Add Job</Button>
+            <Button color="primary" onClick={() => buttonClickHandler()}>Add Job</Button>
           </ButtonDiv>
         </CardBody>
       </JobCard>
