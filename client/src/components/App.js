@@ -2,6 +2,7 @@ import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import SignIn from "./SignIn";
+import Register from "./Register";
 import PageControl from "./PageControl";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
@@ -21,6 +22,9 @@ function App() {
           <Switch>
             <Route path="/signin">
               <SignIn />
+            </Route>
+            <Route path="/register">
+              <Register />
             </Route>
             <Route path="/">
               <PageControl />

@@ -42,7 +42,7 @@ function Splash() {
         <Container>
           <h1>JOB APPLICATIONS MADE EASY</h1>
           <p>Search for jobs and manage your applications.</p>
-          <HeroButton color="warning" href="/signin">Register</HeroButton>
+          <HeroButton color="warning" href="/register">Register</HeroButton>
           <HeroButton color="warning" href="/signin">Sign In</HeroButton>
         </Container>
       </Hero>
