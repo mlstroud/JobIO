@@ -98,6 +98,9 @@ class PageControl extends React.Component {
             onClickEdit={this.handleClickingEdit}
           />
           break;
+        case "/dashboard":
+          currentPage = <Dashboard />
+          break;
         default:
           currentPage = <Splash />
       }

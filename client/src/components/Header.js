@@ -40,13 +40,10 @@ function Header(props) {
     <React.Fragment>
       <FixedNav>
         <Navbar className="navbar-dark bg-dark" expand="md">
-          <NavbarBrand>JobIO</NavbarBrand>
+          <NavbarBrand href="/">JobIO</NavbarBrand>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <NavLink href="#" onClick={() => viewPage("Home")}>Home</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="#" onClick={() => viewPage("Dashboard")}>Dashboard</NavLink>
+              <NavLink href="/dashboard" onClick={() => viewPage("Dashboard")}>Dashboard</NavLink>
             </NavItem>
             <NavItem>
               <NavLink href="/applications" onClick={() => viewPage("Applications")}>Applications</NavLink>

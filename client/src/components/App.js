@@ -1,8 +1,9 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import Splash from "./Splash";
+import SignIn from "./SignIn";
 import PageControl from "./PageControl";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 
 function App() {
@@ -14,11 +15,20 @@ function App() {
 
   return (
     <React.Fragment>
-      <Header />
-      <Wrapper>
-        <PageControl />
-      </Wrapper>
-      <Footer />
+      <Router>
+        <Header />
+        <Wrapper>
+          <Switch>
+            <Route path="/signin">
+              <SignIn />
+            </Route>
+            <Route path="/">
+              <PageControl />
+            </Route>
+          </Switch>
+        </Wrapper>
+        <Footer />
+      </Router>
     </React.Fragment>
   );
 }
