@@ -61,8 +61,15 @@ class PageControl extends React.Component {
     this.props.dispatch(action);
   }
 
-  handleDeletingApplication() {
+  handleDeletingApplication = (id) => {
+    this.props.firestore.delete({ collection: "applications", doc: id });
 
+    let action = {
+      type: "DESELECT_APPLICATION"
+    };
+
+
+    this.props.dispatch(action);
   }
 
   render() {

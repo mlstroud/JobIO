@@ -11,7 +11,7 @@ function ApplicationDetail(props) {
         <p>Applied: {application.appliedDate.toDate().toString()}</p>
         <p>Stage: {application.stage}</p>
         <Button onClick={() => onClickingEdit()}>Edit</Button>
-        <Button onClick={() => onClickingDelete()}>Delete</Button>
+        <Button onClick={() => onClickingDelete(application.id)}>Delete</Button>
       </Jumbotron>
     </React.Fragment>
   );
