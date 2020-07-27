@@ -12,3 +12,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace
 }
+
+.jobList-enter {
+  opacity: 0.01;
+}
+
+.jobList-enter.jobList-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.jobList-leave {
+  opacity: 1;
+}
+
+.jobList-leave.jobList-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
