@@ -1,9 +1,12 @@
 import React from "react";
 import App from "./App";
+import ApplicationList from "./ApplicationList";
 
-function Applications() {
+function Applications(props) {
   return (
-    "Applications"
+    <React.Fragment>
+      <ApplicationList />
+    </React.Fragment>
   );
 }
 

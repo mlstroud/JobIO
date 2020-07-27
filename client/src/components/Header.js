@@ -19,8 +19,11 @@ function Header(props) {
 
     switch (page) {
       case "Search":
-        console.log(1);
         actionType = "TOGGLE_SEARCH";
+        break;
+      case "Applications":
+        actionType = "VIEW_APPLICATIONS";
+        break;
       default:
     }
 
@@ -29,7 +32,7 @@ function Header(props) {
     let action = {
       type: actionType
     }
-    console.log(action);
+
     dispatch(action);
   }
 

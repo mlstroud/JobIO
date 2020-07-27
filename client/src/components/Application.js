@@ -1,8 +1,14 @@
 import React from "react";
 
-function Application() {
+function Application(props) {
   return (
-    "Application"
+    <React.Fragment>
+      <h3>{props.title}</h3>
+      <h4>{props.company} - {props.location}</h4>
+      <p>Applied: {props.appliedDate.toDate().toString()}</p>
+      <p>Stage: {props.stage}</p>
+      <hr />
+    </React.Fragment>
   );
 }
 

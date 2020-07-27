@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Splash from "./Splash";
 import Search from "./Search";
+import Applications from "./Applications";
 import styled from "styled-components";
 
 const PageWrapper = styled.div`
@@ -20,6 +21,8 @@ class PageControl extends React.Component {
 
     if (this.props.isSearching) {
       currentPage = <Search />
+    } else if (this.props.viewingApplications) {
+      currentPage = <Applications />
     }
 
     return (
@@ -35,7 +38,8 @@ class PageControl extends React.Component {
 const mapStateToProps = state => {
   return {
     isEditing: state.isEditing,
-    isSearching: state.isSearching
+    isSearching: state.isSearching,
+    viewingApplications: state.viewingApplications
   }
 };
 
