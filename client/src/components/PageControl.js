@@ -23,8 +23,13 @@ class PageControl extends React.Component {
     }
   }
 
-  handleEditingApplication() {
+  handleEditingApplication = () => {
 
+    let action = {
+      type: "TOGGLE_MANAGE"
+    }
+
+    this.props.dispatch(action);
   }
 
   handleSelectingApplication = (id) => {
@@ -72,7 +77,9 @@ class PageControl extends React.Component {
       />
     } else if (this.props.selectedApplication !== null) {
       currentPage = <ApplicationDetail
-        application={this.props.selectedApplication} />
+        application={this.props.selectedApplication}
+        onClickingEdit={this.handleClickingEdit}
+        onClickingDelete={this.handleDeletingApplication} />
     } else {
       switch (window.location.pathname) {
         case "/search":

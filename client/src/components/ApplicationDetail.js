@@ -1,8 +1,8 @@
 import React from "react";
-import { Jumbotron } from "reactstrap";
+import { Jumbotron, Button } from "reactstrap";
 
 function ApplicationDetail(props) {
-  const { application } = props;
+  const { application, onClickingEdit, onClickingDelete } = props;
   return (
     <React.Fragment>
       <Jumbotron>
@@ -10,6 +10,8 @@ function ApplicationDetail(props) {
         <h4>{application.company} - {application.location}</h4>
         <p>Applied: {application.appliedDate.toDate().toString()}</p>
         <p>Stage: {application.stage}</p>
+        <Button onClick={() => onClickingEdit()}>Edit</Button>
+        <Button onClick={() => onClickingDelete()}>Delete</Button>
       </Jumbotron>
     </React.Fragment>
   );
