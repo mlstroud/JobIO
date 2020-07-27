@@ -8,13 +8,14 @@ import styled from "styled-components";
 function App() {
 
   const Wrapper = styled.div`
+    top: 100px;
     min-height: calc(100vh - 200px);
   `;
 
   return (
     <React.Fragment>
+      <Header />
       <Wrapper>
-        <Header />
         <PageControl />
       </Wrapper>
       <Footer />
