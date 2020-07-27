@@ -4,7 +4,7 @@ import { useFirestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
 import { Spinner } from "reactstrap";
 import Application from "./Application";
 
-function ApplicationList() {
+function ApplicationList(props) {
 
   useFirestoreConnect([
     { collection: "applications" }
@@ -17,6 +17,8 @@ function ApplicationList() {
       <React.Fragment>
         {applications.map((app) => {
           return <Application
+            onClickEdit={props.onClickEdit}
+            onSelectApplication={props.onSelectApplication}
             title={app.title}
             company={app.company}
             location={app.location}

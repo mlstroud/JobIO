@@ -16,7 +16,10 @@ function Applications(props) {
         <Jumbotron>
           <h1>Applications</h1>
         </Jumbotron>
-        <ApplicationList />
+        <ApplicationList
+          onClickEdit={props.onClickEdit}
+          onSelectApplication={props.onSelectApplication}
+        />
       </ApplicationsContainer>
     </React.Fragment>
   );
