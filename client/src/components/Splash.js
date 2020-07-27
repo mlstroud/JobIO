@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Jumbotron, Button } from "reactstrap";
+import { Jumbotron, Button, Container, Media } from "reactstrap";
 
 function Splash() {
 
@@ -24,16 +24,33 @@ function Splash() {
     margin: 0;
   `;
 
+  const HeroButton = styled(Button)`
+    margin: 10px;
+  `;
+
+  const Img = styled.img`
+    width: 25%;
+    opacity: 85%;
+    box-shadow: 1px 3px 3px black;
+    border: 1px solid black;
+    margin: 10px;
+  `;
+
   return (
     <React.Fragment>
       <Hero>
-        <h1>JOB APPLICATIONS MADE EASY</h1>
-        <p>Search for jobs and manage your applications.</p>
-        <Button color="warning">Call To Action Here</Button>
+        <Container>
+          <h1>JOB APPLICATIONS MADE EASY</h1>
+          <p>Search for jobs and manage your applications.</p>
+          <HeroButton color="warning" href="/signin">Register</HeroButton>
+          <HeroButton color="warning" href="/signin">Sign In</HeroButton>
+        </Container>
       </Hero>
       <Info>
         <h2>What is JobIO?</h2>
-        <p>Stuff stuff stuff</p>
+        <p>Look at these charts</p>
+        <Img src="https://images.pexels.com/photos/669619/pexels-photo-669619.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
+        <Img src="https://images.pexels.com/photos/669610/pexels-photo-669610.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
       </Info>
     </React.Fragment>
   );
