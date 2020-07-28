@@ -3,8 +3,9 @@ import firebase from "firebase/app";
 import { Form, Button, Input } from "reactstrap";
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
-function SignIn() {
+function SignIn(props) {
 
   const [userSignedIn, updateUserSignedIn] = useState(false);
 
@@ -16,7 +17,13 @@ function SignIn() {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(() => {
         updateUserSignedIn(true);
+        let action = {
+          type: "USER_SIGNIN",
+          user: email
+        }
+        props.dispatch(action);
         console.log("Signed in successfully");
+        console.log(action.user);
       }).catch((error) => {
         console.log(error.message);
       });
@@ -44,4 +51,4 @@ function SignIn() {
   }
 }
 
-export default SignIn;
+export default connect()(SignIn);

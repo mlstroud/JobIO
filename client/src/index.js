@@ -24,6 +24,16 @@ const rrfProps = {
   createFirestoreInstance
 };
 
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    let action = {
+      type: "USER_SIGNIN",
+      user: user
+    }
+    store.dispatch(action);
+  }
+});
+
 ReactDOM.render(
   <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
