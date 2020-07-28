@@ -43,6 +43,7 @@ class PageControl extends React.Component {
           location: application.get("location"),
           appliedDate: application.get("appliedDate"),
           stage: application.get("stage"),
+          user: application.get("user"),
           id: application.id
         };
 
@@ -74,17 +75,7 @@ class PageControl extends React.Component {
   }
 
   render() {
-    const auth = this.props.firebase.auth();
     let currentPage;
-
-    if (!isLoaded(auth)) {
-      return (
-        <React.Fragment>
-          <br /><br /><br /><br />
-          <Spinner />
-        </React.Fragment>
-      );
-    }
 
     if (!this.props.currentUser) {
       // if ((isLoaded(auth)) && (auth.currentUser == null)) {
