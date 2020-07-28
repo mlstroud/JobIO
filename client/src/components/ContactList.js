@@ -29,6 +29,8 @@ function ContactList(props) {
     <React.Fragment>
       {contacts !== null && contacts.map((contact) => {
         return <Contact
+          key={contact.id}
+          id={contact.id}
           name={contact.data.name}
           email={contact.data.email}
           phone={contact.data.phone}
