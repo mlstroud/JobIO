@@ -47,6 +47,8 @@ function Header(props) {
         actionType = "VIEW_APPLICATIONS";
         dispatch({ type: actionType });
         actionType = "NO_MANAGE";
+        dispatch({ type: actionType });
+        actionType = "DESELECT_APPLICATION";
         break;
       default:
     }
