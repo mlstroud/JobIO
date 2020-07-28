@@ -1,8 +1,12 @@
 import React from "react";
 
-function Contact() {
+function Contact(props) {
   return (
-    "Contact"
+    <React.Fragment>
+      <h4>{props.name}</h4>
+      <p>{props.email}</p>
+      <p>{props.phone}</p>
+    </React.Fragment>
   );
 }
 
