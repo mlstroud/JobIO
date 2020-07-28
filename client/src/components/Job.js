@@ -23,9 +23,12 @@ function Job(props) {
       company: props.company,
       location: props.location,
       summary: props.summary,
-      stage: "applied"
+      stage: "Applied",
+      user: props.user
     });
   }
+
+  console.log(props);
 
   return (
     <React.Fragment>

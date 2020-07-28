@@ -1,6 +1,7 @@
 import React from "react";
 import Job from "./Job";
 import { useFirestore } from "react-redux-firebase";
+import { connect } from "react-redux";
 
 function JobList(props) {
 
@@ -14,6 +15,7 @@ function JobList(props) {
       location: jobToAdd.location,
       summary: jobToAdd.summary,
       stage: jobToAdd.stage,
+      user: jobToAdd.user,
       appliedDate: firestore.FieldValue.serverTimestamp()
     });
   }
@@ -27,9 +29,16 @@ function JobList(props) {
         title={job.title}
         company={job.company}
         location={job.location}
-        summary={job.summary} />
+        summary={job.summary}
+        user={props.currentUser.email} />
     })
   );
 }
 
-export default JobList;
+const mapStateToProps = state => {
+  return {
+    currentUser: state.currentUser
+  }
+}
+
+export default connect(mapStateToProps)(JobList);

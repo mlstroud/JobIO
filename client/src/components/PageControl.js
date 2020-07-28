@@ -7,7 +7,8 @@ import Dashboard from "./Dashboard";
 import ManageApplication from "./ManageApplication";
 import ApplicationDetail from "./ApplicationDetail";
 import styled from "styled-components";
-import { withFirestore } from "react-redux-firebase";
+import { withFirestore, isLoaded } from "react-redux-firebase";
+import { Spinner } from "reactstrap";
 
 const PageWrapper = styled.div`
   top: 100px;
@@ -42,6 +43,7 @@ class PageControl extends React.Component {
           location: application.get("location"),
           appliedDate: application.get("appliedDate"),
           stage: application.get("stage"),
+          user: application.get("user"),
           id: application.id
         };
 
@@ -75,41 +77,54 @@ class PageControl extends React.Component {
   render() {
     let currentPage;
 
-
-    if (this.props.isEditing) {
-      console.log(this.state.selected);
-      currentPage = <ManageApplication
-        onEditApplication={this.handleEditingApplication}
-        application={this.props.selectedApplication}
-      />
-    } else if (this.props.selectedApplication !== null) {
-      currentPage = <ApplicationDetail
-        application={this.props.selectedApplication}
-        onClickingEdit={this.handleClickingEdit}
-        onClickingDelete={this.handleDeletingApplication} />
-    } else {
-      switch (window.location.pathname) {
-        case "/search":
-          currentPage = <Search />
-          break;
-        case "/applications":
-          currentPage = <Applications
-            onSelectApplication={this.handleSelectingApplication}
-            onClickEdit={this.handleClickingEdit}
-          />
-          break;
-        default:
-          currentPage = <Splash />
-      }
+    if (!this.props.currentUser) {
+      // if ((isLoaded(auth)) && (auth.currentUser == null)) {
+      return (
+        <React.Fragment>
+          <Splash />
+        </React.Fragment>
+      );
     }
+    else {
+      // if ((isLoaded(auth)) && (auth.currentUser !== null)) {
+      if (this.props.isEditing) {
+        console.log(this.state.selected);
+        currentPage = <ManageApplication
+          onEditApplication={this.handleEditingApplication}
+          application={this.props.selectedApplication}
+        />
+      } else if (this.props.selectedApplication !== null) {
+        currentPage = <ApplicationDetail
+          application={this.props.selectedApplication}
+          onClickingEdit={this.handleClickingEdit}
+          onClickingDelete={this.handleDeletingApplication} />
+      } else {
+        switch (window.location.pathname) {
+          case "/search":
+            currentPage = <Search />
+            break;
+          case "/applications":
+            currentPage = <Applications
+              onSelectApplication={this.handleSelectingApplication}
+              onClickEdit={this.handleClickingEdit}
+            />
+            break;
+          case "/dashboard":
+            currentPage = <Dashboard />
+            break;
+          default:
+            currentPage = <Splash />
+        }
+      }
 
-    return (
-      <React.Fragment>
-        <PageWrapper>
-          {currentPage}
-        </PageWrapper>
-      </React.Fragment>
-    );
+      return (
+        <React.Fragment>
+          <PageWrapper>
+            {currentPage}
+          </PageWrapper>
+        </React.Fragment>
+      );
+    }
   }
 }
 
@@ -118,7 +133,8 @@ const mapStateToProps = state => {
     isEditing: state.isEditing,
     isSearching: state.isSearching,
     selectedApplication: state.selectedApplication,
-    viewingApplications: state.viewingApplications
+    viewingApplications: state.viewingApplications,
+    currentUser: state.currentUser
   }
 };
 
