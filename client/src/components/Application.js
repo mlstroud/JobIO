@@ -7,8 +7,6 @@ function Application(props) {
     props.onSelectApplication(props.id);
   }
 
-  console.log(props);
-
   return (
     <React.Fragment>
       <h3>{props.title}</h3>
