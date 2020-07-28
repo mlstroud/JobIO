@@ -1,6 +1,7 @@
 import React from "react";
 import ContactList from "./ContactList";
 import FollowUpList from "./FollowUpList";
+import InterviewList from "./InterviewList";
 import { Jumbotron, Button } from "reactstrap";
 import { Form, Input } from "reactstrap";
 import { useFirestore } from "react-redux-firebase";
@@ -13,12 +14,15 @@ function ApplicationDetail(props) {
 
   const [contacts, setContacts] = useState(null);
   const [followUps, setFollowUps] = useState(null);
+  const [interviews, setInterviews] = useState(null);
   const [contactModal, setContactModal] = useState(false);
   const [followUpsModal, setFollowUpsModal] = useState(false);
+  const [interviewModal, setInterviewModal] = useState(false);
 
   useEffect(() => {
     let contactData = [];
     let followUpData = [];
+    let interviewData = [];
 
     firestore.collection("contacts").where("appId", "==", application.id).get()
       .then((results) => {
@@ -42,6 +46,19 @@ function ApplicationDetail(props) {
           });
         });
         setFollowUps(followUpData);
+      }).catch((error) => {
+        console.log(error.message);
+      });
+
+    firestore.collection("interviews").where("appId", "==", application.id).get()
+      .then((results) => {
+        results.forEach((doc) => {
+          interviewData.push({
+            data: doc.data(),
+            id: doc.id
+          });
+          setInterviews(interviewData);
+        });
       }).catch((error) => {
         console.log(error.message);
       });
@@ -75,6 +92,19 @@ function ApplicationDetail(props) {
     });
   }
 
+  function onAddInterview(event) {
+    event.preventDefault();
+    setInterviewModal(!interviewModal);
+
+    return firestore.collection("interviews").add({
+      date: event.target.date.value,
+      time: event.target.time.value,
+      type: event.target.type.value,
+      notes: event.target.notes.value,
+      appId: application.id
+    });
+  }
+
   return (
     <React.Fragment>
       <Jumbotron>
@@ -89,6 +119,10 @@ function ApplicationDetail(props) {
         <h3>Follow Ups</h3>
         <Button onClick={() => setFollowUpsModal(true)}>Add Follow Up</Button>
         <FollowUpList followups={followUps} appId={application.id} />
+        <hr />
+        <h3>Interviews</h3>
+        <Button onClick={() => setInterviewModal(true)}>Add Interview</Button>
+        <InterviewList interviews={interviews} appId={application.id} />
         <hr />
         <Button onClick={() => onClickingEdit()}>Edit</Button>
         <Button onClick={() => onClickingDelete(application.id)}>Delete</Button>
@@ -116,6 +150,22 @@ function ApplicationDetail(props) {
               })}
             </Input>
             <Button type="submit">Add Follow Up</Button>
+          </Form>
+        </ModalBody>
+      </Modal>
+      <Modal isOpen={interviewModal} toggle={() => setInterviewModal(!interviewModal)}>
+        <ModalHeader toggle={() => setInterviewModal(!interviewModal)}>Add Interview</ModalHeader>
+        <ModalBody>
+          <Form onSubmit={onAddInterview}>
+            <Input name="date" placeholder="date" />
+            <Input name="time" placeholder="time" />
+            <Input name="type" type="select">
+              <option>Phone</option>
+              <option>On Site</option>
+              <option>Virtual</option>
+            </Input>
+            <Input name="notes" placeholder="notes" />
+            <Button type="submit">Add Interview</Button>
           </Form>
         </ModalBody>
       </Modal>
