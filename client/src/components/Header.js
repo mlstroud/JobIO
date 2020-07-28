@@ -16,7 +16,9 @@ function Header(props) {
   `;
 
   const RightNav = styled(Nav)`
-    float: right;
+    right: 0;
+    position: absolute;
+    margin-right: 20px;
   `;
 
   function viewPage(page) {
@@ -28,13 +30,23 @@ function Header(props) {
       case "Dashboard":
         actionType = "NO_SEARCH";
         dispatch({ type: actionType });
+        actionType = "NO_MANAGE";
+        dispatch({ type: actionType });
         actionType = "NO_APPLICATIONS";
+        dispatch({ type: actionType });
+        actionType = "DESELECT_APPLICATION";
         break;
       case "Search":
         actionType = "TOGGLE_SEARCH";
+        dispatch({ type: actionType });
+        actionType = "NO_MANAGE";
+        dispatch({ type: actionType });
+        actionType = "DESELECT_APPLICATION";
         break;
       case "Applications":
         actionType = "VIEW_APPLICATIONS";
+        dispatch({ type: actionType });
+        actionType = "NO_MANAGE";
         break;
       default:
     }
@@ -65,25 +77,37 @@ function Header(props) {
       <FixedNav>
         <Navbar className="navbar-dark bg-dark" expand="md">
           <Link to="/"><NavbarBrand>JobIO</NavbarBrand></Link>
-          <Nav className="mr-auto" navbar>
-            <NavItem>
-              <Link to="/dashboard" onClick={() => viewPage("Dashboard")}><NavLink>Dashboard</NavLink></Link>
-            </NavItem>
-            <NavItem>
-              <Link to="/applications" onClick={() => viewPage("Applications")}><NavLink>Applications</NavLink></Link>
-            </NavItem>
-            <NavItem>
-              <Link to="/search" onClick={() => viewPage("Search")}><NavLink>Search</NavLink></Link>
-            </NavItem>
-          </Nav>
-          <RightNav navbar>
-            <NavItem>
-              <NavLink>{props.currentUser !== null && "Hello, " + props.currentUser.email}</NavLink>
-            </NavItem>
-            <NavItem>
-              {props.currentUser !== null && <Link><NavLink onClick={() => userSignOut()}>Sign Out</NavLink></Link>}
-            </NavItem>
-          </RightNav>
+          {props.currentUser !== null &&
+            <Nav className="mr-auto" navbar>
+              <NavItem>
+                <Link to="/dashboard" onClick={() => viewPage("Dashboard")}><NavLink>Dashboard</NavLink></Link>
+              </NavItem>
+              <NavItem>
+                <Link to="/applications" onClick={() => viewPage("Applications")}><NavLink>Applications</NavLink></Link>
+              </NavItem>
+              <NavItem>
+                <Link to="/search" onClick={() => viewPage("Search")}><NavLink>Search</NavLink></Link>
+              </NavItem>
+            </Nav>}
+          {props.currentUser !== null &&
+            <RightNav navbar>
+              <NavItem>
+                <NavLink>Hello, {props.currentUser.email}</NavLink>
+              </NavItem>
+              <NavItem>
+                <Link><NavLink onClick={() => userSignOut()}>Sign Out</NavLink></Link>
+              </NavItem>
+            </RightNav>}
+
+          {props.currentUser === null &&
+            <RightNav navbar>
+              <NavItem>
+                <Link to="/signin"><NavLink>Sign In</NavLink></Link>
+              </NavItem>
+              <NavItem>
+                <Link to="/register"><NavLink>Register</NavLink></Link>
+              </NavItem>
+            </RightNav>}
         </Navbar>
       </FixedNav>
     </React.Fragment>
