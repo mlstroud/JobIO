@@ -1,6 +1,6 @@
 import React from "react";
 import firebase from "firebase/app";
-import { Container, Form, Button, Input, Label, Jumbotron } from "reactstrap";
+import { Container, Form, Button, Input, Label, Jumbotron, Spinner } from "reactstrap";
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
@@ -37,12 +37,15 @@ function SignIn(props) {
 
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(() => {
-        updateUserSignedIn(true);
         let action = {
           type: "USER_SIGNIN",
           user: email
         }
         props.dispatch(action);
+        setTimeout(() => {
+          updateUserSignedIn(true);
+        }, 10)
+
         console.log("Signed in successfully");
         console.log(action.user);
       }).catch((error) => {
@@ -52,6 +55,7 @@ function SignIn(props) {
 
   if (userSignedIn) {
     return <Redirect to="/dashboard" />
+
   } else {
     return (
       <React.Fragment>
@@ -75,6 +79,7 @@ function SignIn(props) {
             </Form>
           </SignInTron>
         </SignInContainer>
+
       </React.Fragment>
     );
   }
