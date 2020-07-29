@@ -7,25 +7,37 @@ import { Form, Input } from "reactstrap";
 import { useFirestore } from "react-redux-firebase";
 import { useState, useEffect } from "react";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import { Card } from "reactstrap";
+import { Card, Row, Col } from "reactstrap";
+import Stepper from "@material-ui/core/Stepper";
+import Step from "@material-ui/core/Step";
+import StepLabel from "@material-ui/core/StepLabel";
 import styled from "styled-components";
 
 const AppTron = styled(Jumbotron)`
   margin-top: 200px;
-  box-shadow: 1px 2x 2px black;
+  box-shadow: 1px 2px 2px black;
+  min-height: 300px;
 `;
 
-const AppProgress = styled.ul`
-  li.active {
-    color: success;
-  }
-  li.active:before {
-    border-color: success;
-    background-color: success;
-  }
-  li.active + li:after {
-    background-color: success;
-  }
+const AppButton = styled(Button)`
+  margin: 5px;
+  box-shadow: 1px 1px 1px black;
+`;
+
+const CompanyInfo = styled.div`
+  float: left;
+`;
+
+const EditInfo = styled.div`
+  float: right;
+`;
+
+const AppStepper = styled(Stepper)`
+  background-color: #e9ecef !important;
+`;
+
+const AppStep = styled(Step)`
+
 `;
 
 function ApplicationDetail(props) {
@@ -127,34 +139,59 @@ function ApplicationDetail(props) {
     });
   }
 
+  let stages = {
+    "Applied": 1,
+    "Phone Screen": 2,
+    "Interview": 3,
+    "Offer": 4
+  }
+
   return (
     <React.Fragment>
       <Container>
         <AppTron>
-          <AppProgress>
-            <li>Test</li>
-            <li>Test</li>
-            <li>Test</li>
-          </AppProgress>
-          <h3>{application.title}</h3>
-          <h4>{application.company} - {application.location}</h4>
-          <p>Applied: {application.appliedDate.toDate().toString()}</p>
-          <p>Stage: {application.stage}</p>
-          <h3>Contact List</h3>
-          <Button onClick={() => setContactModal(true)}>Add Contact</Button>
-          <ContactList contacts={contacts} appId={application.id} />
-          <hr />
-          <h3>Follow Ups</h3>
-          <Button onClick={() => setFollowUpsModal(true)}>Add Follow Up</Button>
-          <FollowUpList followups={followUps} appId={application.id} />
-          <hr />
-          <h3>Interviews</h3>
-          <Button onClick={() => setInterviewModal(true)}>Add Interview</Button>
-          <InterviewList interviews={interviews} appId={application.id} />
-          <hr />
-          <Button onClick={() => onClickingEdit()}>Edit</Button>
-          <Button onClick={() => onClickingDelete(application.id)}>Delete</Button>
+          {application.stage !== "Denied" &&
+            <AppStepper activeStep={stages[application.stage]}>
+              <AppStep key={1}>
+                <StepLabel>Applied</StepLabel>
+              </AppStep>
+              <AppStep key={2}>
+                <StepLabel>Phone Screen</StepLabel>
+              </AppStep>
+              <AppStep key={3}>
+                <StepLabel>Interview</StepLabel>
+              </AppStep>
+              <AppStep key={4}>
+                <StepLabel>Offer</StepLabel>
+              </AppStep>
+            </AppStepper>}
+          {application.stage === "Denied" &&
+            <h4><font color="red">This application has been denied.</font></h4>
+          }
+          <CompanyInfo>
+            <h3>{application.title}</h3>
+            <h4>{application.company} - {application.location}</h4>
+            <p>Applied: {application.appliedDate.toDate().toString()}</p>
+          </CompanyInfo>
+          <EditInfo>
+            <AppButton onClick={() => onClickingEdit()} color="warning">Edit</AppButton>
+            <AppButton onClick={() => onClickingDelete(application.id)} color="danger">Delete</AppButton>
+          </EditInfo>
         </AppTron>
+        <Row>
+          <Col className="col-md-4">
+            <h4>Interviews</h4>
+            <InterviewList interviews={interviews} appId={application.id} />
+          </Col>
+          <Col className="col-md-4">
+            <h4>Follow Ups</h4>
+            <FollowUpList followups={followUps} appId={application.id} />
+          </Col>
+          <Col className="col-md-4">
+            <h4>Contacts</h4>
+            <ContactList contacts={contacts} appId={application.id} />
+          </Col>
+        </Row>
       </Container>
 
       <Modal isOpen={contactModal} toggle={() => setContactModal(!contactModal)}>

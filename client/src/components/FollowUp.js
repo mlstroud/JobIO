@@ -1,8 +1,24 @@
 import React from "react";
 import { Button } from "reactstrap";
-import { Form, Input, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Form, Label, Input, Modal, ModalHeader, ModalBody, ModalFooter, Card, CardHeader, CardTitle, CardBody, CardText } from "reactstrap";
 import { useFirestore } from "react-redux-firebase";
 import { useState } from "react";
+import styled from "styled-components";
+
+const FollowUpCard = styled(Card)`
+  box-shadow: 1px 2px 2px black;
+  margin: 5px;
+  cursor: pointer;
+`;
+
+const ModalButton = styled(Button)`
+  margin: 5px;
+  box-shadow: 1px 1px 1px black;
+`;
+
+const ModalLabel = styled(Label)`
+  font-weight: bold;
+`;
 
 function FollowUp(props) {
 
@@ -38,23 +54,35 @@ function FollowUp(props) {
 
   return (
     <React.Fragment>
-      <h4>{props.date}</h4>
-      <p>{props.name}</p>
-      <p>{props.phone}</p>
-      <p>{props.email}</p>
-      <Button onClick={() => onEditClick()}>Edit</Button>
+      <FollowUpCard onClick={() => onEditClick()}>
+        <CardHeader>
+          <CardTitle><strong>{props.date}</strong></CardTitle>
+        </CardHeader>
+        <CardBody>
+          <CardText>
+            <p>With: {props.name}</p>
+            <p>Email: {props.email}</p>
+            <p>Phone: {props.phone}</p>
+          </CardText>
+        </CardBody>
+      </FollowUpCard>
 
       <Modal isOpen={modal} toggle={() => setModal(!modal)}>
         <ModalHeader toggle={() => setModal(!modal)}>Edit Follow Up</ModalHeader>
         <ModalBody>
           <Form onSubmit={editSubmissionHandler}>
+            <ModalLabel for="date">Date</ModalLabel>
             <Input name="date" defaultValue={props.date} />
+            <ModalLabel for="name">Name</ModalLabel>
             <Input name="name" defaultValue={props.name} />
-            <Input name="phone" defaultValue={props.phone} />
+            <ModalLabel for="email">Email</ModalLabel>
             <Input name="email" defaultValue={props.email} />
-            <Button type="submit">Save</Button>
+            <ModalLabel for="phone">Phone</ModalLabel>
+            <Input name="phone" defaultValue={props.phone} />
+            <hr />
+            <ModalButton type="submit" color="primary">Save</ModalButton>
+            <ModalButton onClick={() => deleteFollowUp(props.id)} color="danger">Delete</ModalButton>
           </Form>
-          <Button onClick={() => deleteFollowUp(props.id)}>Delete</Button>
         </ModalBody>
       </Modal>
     </React.Fragment>

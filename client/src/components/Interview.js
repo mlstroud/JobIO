@@ -1,8 +1,20 @@
 import React from "react";
 import { Button } from "reactstrap";
-import { Form, Input, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Form, Input, Label, Modal, ModalHeader, ModalBody, ModalFooter, Card, CardHeader, CardTitle, CardBody, CardText } from "reactstrap";
 import { useFirestore } from "react-redux-firebase";
 import { useState } from "react";
+import styled from "styled-components";
+
+const InterviewCard = styled(Card)`
+  box-shadow: 1px 2px 2px black;
+  margin: 5px;
+  cursor: pointer;
+`;
+
+const ModalButton = styled(Button)`
+  margin: 5px;
+  box-shadow: 1px 1px 1px black;
+`;
 
 function Interview(props) {
 
@@ -38,26 +50,36 @@ function Interview(props) {
 
   return (
     <React.Fragment>
-      <h4>{props.date} - {props.time}</h4>
-      <p>{props.type}</p>
-      <p>{props.notes}</p>
-      <Button onClick={() => onEditClick()}>Edit</Button>
+      <InterviewCard onClick={() => onEditClick()}>
+        <CardHeader>
+          <CardTitle>{props.date} - {props.time}</CardTitle>
+        </CardHeader>
+        <CardBody>
+          <p>Type: {props.type}</p>
+          <p>Notes: {props.notes}</p>
+        </CardBody>
+      </InterviewCard>
 
       <Modal isOpen={modal} toggle={(() => setModal(!modal))}>
         <ModalHeader toggle={() => setModal(!modal)}>Edit Interview</ModalHeader>
         <ModalBody>
           <Form onSubmit={editSubmissionHandler}>
+            <Label for="date"><strong>Date</strong></Label>
             <Input name="date" defaultValue={props.date} />
+            <Label for="time"><strong>Time</strong></Label>
             <Input name="time" defaultValue={props.time} />
+            <Label for="type"><strong>Type</strong></Label>
             <Input name="type" defaultValue={props.type} type="select">
               <option>Phone</option>
               <option>On Site</option>
               <option>Virtual</option>
             </Input>
+            <Label for="notes"><strong>Notes</strong></Label>
             <Input name="notes" defaultValue={props.notes} />
-            <Button type="submit">Save</Button>
+            <hr />
+            <ModalButton type="submit" color="primary">Save</ModalButton>
+            <ModalButton onClick={() => deleteInterview(props.id)} color="danger">Delete</ModalButton>
           </Form>
-          <Button onClick={() => deleteInterview(props.id)}>Delete</Button>
         </ModalBody>
       </Modal>
     </React.Fragment>
