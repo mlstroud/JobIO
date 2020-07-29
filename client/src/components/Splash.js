@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { Jumbotron, Button, Container, Media } from "reactstrap";
+import { connect } from "react-redux";
 
-function Splash() {
+function Splash(props) {
 
   const Hero = styled(Jumbotron)`
     background-color: #0E5A8A;
@@ -39,12 +40,18 @@ function Splash() {
   return (
     <React.Fragment>
       <Hero>
-        <Container>
-          <h1>JOB APPLICATIONS MADE EASY</h1>
-          <p>Search for jobs and manage your applications.</p>
-          <HeroButton color="warning" href="/register">Register</HeroButton>
-          <HeroButton color="warning" href="/signin">Sign In</HeroButton>
-        </Container>
+        {props.currentUser === null &&
+          <Container>
+            <h1>JOB APPLICATIONS MADE EASY</h1>
+            <p>Search for jobs and manage your applications.</p>
+            <HeroButton color="warning" href="/register">Register</HeroButton>
+            <HeroButton color="warning" href="/signin">Sign In</HeroButton>
+          </Container>}
+        {props.currentUser !== null &&
+          <Container>
+            <h1>Welcome, {props.currentUser.email}</h1>
+          </Container>
+        }
       </Hero>
       <Info>
         <h2>What is JobIO?</h2>
@@ -56,4 +63,10 @@ function Splash() {
   );
 }
 
-export default Splash;
+const mapStateToProps = state => {
+  return {
+    currentUser: state.currentUser
+  }
+}
+
+export default connect(mapStateToProps)(Splash);

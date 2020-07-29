@@ -2,11 +2,31 @@ import React from "react";
 import ContactList from "./ContactList";
 import FollowUpList from "./FollowUpList";
 import InterviewList from "./InterviewList";
-import { Jumbotron, Button } from "reactstrap";
+import { Container, Jumbotron, Button } from "reactstrap";
 import { Form, Input } from "reactstrap";
 import { useFirestore } from "react-redux-firebase";
 import { useState, useEffect } from "react";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Card } from "reactstrap";
+import styled from "styled-components";
+
+const AppTron = styled(Jumbotron)`
+  margin-top: 200px;
+  box-shadow: 1px 2x 2px black;
+`;
+
+const AppProgress = styled.ul`
+  li.active {
+    color: success;
+  }
+  li.active:before {
+    border-color: success;
+    background-color: success;
+  }
+  li.active + li:after {
+    background-color: success;
+  }
+`;
 
 function ApplicationDetail(props) {
   const { application, onClickingEdit, onClickingDelete } = props;
@@ -88,6 +108,7 @@ function ApplicationDetail(props) {
       contactName: followUpContact.data.name,
       contactEmail: followUpContact.data.email,
       contactPhone: followUpContact.data.phone,
+      user: props.currentUser.email,
       appId: application.id
     });
   }
@@ -101,32 +122,40 @@ function ApplicationDetail(props) {
       time: event.target.time.value,
       type: event.target.type.value,
       notes: event.target.notes.value,
+      user: props.currentUser.email,
       appId: application.id
     });
   }
 
   return (
     <React.Fragment>
-      <Jumbotron>
-        <h3>{application.title}</h3>
-        <h4>{application.company} - {application.location}</h4>
-        <p>Applied: {application.appliedDate.toDate().toString()}</p>
-        <p>Stage: {application.stage}</p>
-        <h3>Contact List</h3>
-        <Button onClick={() => setContactModal(true)}>Add Contact</Button>
-        <ContactList contacts={contacts} appId={application.id} />
-        <hr />
-        <h3>Follow Ups</h3>
-        <Button onClick={() => setFollowUpsModal(true)}>Add Follow Up</Button>
-        <FollowUpList followups={followUps} appId={application.id} />
-        <hr />
-        <h3>Interviews</h3>
-        <Button onClick={() => setInterviewModal(true)}>Add Interview</Button>
-        <InterviewList interviews={interviews} appId={application.id} />
-        <hr />
-        <Button onClick={() => onClickingEdit()}>Edit</Button>
-        <Button onClick={() => onClickingDelete(application.id)}>Delete</Button>
-      </Jumbotron>
+      <Container>
+        <AppTron>
+          <AppProgress>
+            <li>Test</li>
+            <li>Test</li>
+            <li>Test</li>
+          </AppProgress>
+          <h3>{application.title}</h3>
+          <h4>{application.company} - {application.location}</h4>
+          <p>Applied: {application.appliedDate.toDate().toString()}</p>
+          <p>Stage: {application.stage}</p>
+          <h3>Contact List</h3>
+          <Button onClick={() => setContactModal(true)}>Add Contact</Button>
+          <ContactList contacts={contacts} appId={application.id} />
+          <hr />
+          <h3>Follow Ups</h3>
+          <Button onClick={() => setFollowUpsModal(true)}>Add Follow Up</Button>
+          <FollowUpList followups={followUps} appId={application.id} />
+          <hr />
+          <h3>Interviews</h3>
+          <Button onClick={() => setInterviewModal(true)}>Add Interview</Button>
+          <InterviewList interviews={interviews} appId={application.id} />
+          <hr />
+          <Button onClick={() => onClickingEdit()}>Edit</Button>
+          <Button onClick={() => onClickingDelete(application.id)}>Delete</Button>
+        </AppTron>
+      </Container>
 
       <Modal isOpen={contactModal} toggle={() => setContactModal(!contactModal)}>
         <ModalHeader toggle={() => setContactModal(!contactModal)}>Add Contact</ModalHeader>
