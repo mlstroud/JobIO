@@ -20,7 +20,7 @@ class PageControl extends React.Component {
     super(props);
     console.log(props);
     this.state = {
-      selected: null
+      currentPage: null
     }
   }
 
@@ -89,38 +89,41 @@ class PageControl extends React.Component {
       // if ((isLoaded(auth)) && (auth.currentUser !== null)) {
       if (this.props.isEditing) {
         console.log(this.state.selected);
-        currentPage = <ManageApplication
+        this.state.currentPage = <ManageApplication
           onEditApplication={this.handleEditingApplication}
           application={this.props.selectedApplication}
         />
       } else if (this.props.selectedApplication !== null) {
-        currentPage = <ApplicationDetail
+        this.state.currentPage = <ApplicationDetail
+          currentUser={this.props.currentUser}
           application={this.props.selectedApplication}
           onClickingEdit={this.handleClickingEdit}
           onClickingDelete={this.handleDeletingApplication} />
       } else {
         switch (window.location.pathname) {
           case "/search":
-            currentPage = <Search />
+            this.state.currentPage = <Search />
             break;
           case "/applications":
-            currentPage = <Applications
+            this.state.currentPage = <Applications
               onSelectApplication={this.handleSelectingApplication}
               onClickEdit={this.handleClickingEdit}
             />
             break;
           case "/dashboard":
-            currentPage = <Dashboard />
+            this.state.currentPage = <Dashboard
+              onSelect={this.handleSelectingApplication}
+              currentUser={this.props.currentUser} />
             break;
           default:
-            currentPage = <Splash />
+            this.state.currentPage = <Splash />
         }
       }
 
       return (
         <React.Fragment>
           <PageWrapper>
-            {currentPage}
+            {this.state.currentPage}
           </PageWrapper>
         </React.Fragment>
       );
