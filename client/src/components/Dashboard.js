@@ -18,8 +18,6 @@ const DashTron = styled(Jumbotron)`
   border-radius: 0 !important;
 `;
 
-
-
 const MyChart = styled(Chart)`
 
 `;
@@ -60,6 +58,17 @@ function Dashboard(props) {
   const [interviews, setInterviews] = useState(null);
   const [followups, setFollowups] = useState(null);
   const today = new Date();
+
+  let yesterday = new Date();
+  yesterday.setDate(today.getDate() - 1);
+  let dateList = [
+    (today.getMonth() + 1) + "/" + today.getDate()
+  ];
+  for (let i = 1; i < 10; i++) {
+    let newDay = new Date();
+    newDay.setDate(today.getDate() - i);
+    dateList.push((newDay.getMonth() + 1) + "/" + newDay.getDate());
+  }
 
   useEffect(() => {
     let appData = [];
@@ -136,6 +145,9 @@ function Dashboard(props) {
     }]
   };
 
+  console.log("DATES");
+  console.log(dateList);
+
   return (
     <React.Fragment>
       <DashboardWrapper>
@@ -153,19 +165,22 @@ function Dashboard(props) {
                 <p><strong>Applications per Day</strong></p>
                 {applicationData !== null &&
                   <MyChart
-                    width={"600px"}
+                    width={"100%"}
                     height={"250px"}
                     chartType="LineChart"
                     loader={<Spinner />}
                     data={[
                       ["Number", "Apps"],
-                      [(today.getMonth() + 1) + "/" + (today.getDate() - 6), 1],
-                      [(today.getMonth() + 1) + "/" + (today.getDate() - 5), 2],
-                      [(today.getMonth() + 1) + "/" + (today.getDate() - 4), 2],
-                      [(today.getMonth() + 1) + "/" + (today.getDate() - 3), 1],
-                      [(today.getMonth() + 1) + "/" + (today.getDate() - 2), 2],
-                      [(today.getMonth() + 1) + "/" + (today.getDate() - 1), 1],
-                      [(today.getMonth() + 1) + "/" + (today.getDate()), 3]
+                      [dateList[9], 1],
+                      [dateList[8], 1],
+                      [dateList[7], 1],
+                      [dateList[6], 1],
+                      [dateList[5], 2],
+                      [dateList[4], 2],
+                      [dateList[3], 1],
+                      [dateList[2], 2],
+                      [dateList[1], 1],
+                      [dateList[0], 3]
                     ]}
                     options={{
                       hAxis: {
@@ -182,7 +197,7 @@ function Dashboard(props) {
                 <p><strong>Pipeline</strong></p>
                 {applicationData !== null &&
                   <MyChart
-                    width={"500px"}
+                    width={"100%"}
                     height={"325px"}
                     chartType="PieChart"
                     loader={<Spinner />}
