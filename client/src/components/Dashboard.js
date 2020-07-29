@@ -57,23 +57,22 @@ function Dashboard(props) {
   const [applicationData, setApplicationData] = useState(null);
   const [interviews, setInterviews] = useState(null);
   const [followups, setFollowups] = useState(null);
-  const today = new Date();
+  const [appsPerDay, setAppsPerDay] = useState(null);
 
-  let yesterday = new Date();
-  yesterday.setDate(today.getDate() - 1);
-  let dateList = [
-    (today.getMonth() + 1) + "/" + today.getDate()
-  ];
+  const today = new Date();
+  let graphDates = [today];
+
   for (let i = 1; i < 10; i++) {
     let newDay = new Date();
     newDay.setDate(today.getDate() - i);
-    dateList.push((newDay.getMonth() + 1) + "/" + newDay.getDate());
+    graphDates.push(newDay);
   }
 
   useEffect(() => {
     let appData = [];
     let interviewData = [];
     let followupData = [];
+    let graphData = [];
 
     firestore.collection("applications").where("user", "==", props.currentUser.email).get()
       .then((results) => {
@@ -83,7 +82,44 @@ function Dashboard(props) {
             id: doc.id
           });
         });
+
         setApplications(appData);
+
+        graphData = [
+          appData.filter((app) => app.data.appliedDate.toDate().getMonth() === graphDates[0].getMonth()
+            && app.data.appliedDate.toDate().getDate() === graphDates[0].getDate()).length,
+          appData.filter((app) => app.data.appliedDate.toDate().getMonth() === graphDates[1].getMonth()
+            && app.data.appliedDate.toDate().getDate() === graphDates[1].getDate()).length,
+          appData.filter((app) => app.data.appliedDate.toDate().getMonth() === graphDates[2].getMonth()
+            && app.data.appliedDate.toDate().getDate() === graphDates[2].getDate()).length,
+          appData.filter((app) => app.data.appliedDate.toDate().getMonth() === graphDates[3].getMonth()
+            && app.data.appliedDate.toDate().getDate() === graphDates[3].getDate()).length,
+          appData.filter((app) => app.data.appliedDate.toDate().getMonth() === graphDates[4].getMonth()
+            && app.data.appliedDate.toDate().getDate() === graphDates[4].getDate()).length,
+          appData.filter((app) => app.data.appliedDate.toDate().getMonth() === graphDates[5].getMonth()
+            && app.data.appliedDate.toDate().getDate() === graphDates[5].getDate()).length,
+          appData.filter((app) => app.data.appliedDate.toDate().getMonth() === graphDates[6].getMonth()
+            && app.data.appliedDate.toDate().getDate() === graphDates[6].getDate()).length,
+          appData.filter((app) => app.data.appliedDate.toDate().getMonth() === graphDates[7].getMonth()
+            && app.data.appliedDate.toDate().getDate() === graphDates[7].getDate()).length,
+          appData.filter((app) => app.data.appliedDate.toDate().getMonth() === graphDates[8].getMonth()
+            && app.data.appliedDate.toDate().getDate() === graphDates[8].getDate()).length,
+          appData.filter((app) => app.data.appliedDate.toDate().getMonth() === graphDates[9].getMonth()
+            && app.data.appliedDate.toDate().getDate() === graphDates[9].getDate()).length
+        ];
+
+        setAppsPerDay(graphData);
+
+        // appData.forEach((app) => {
+        //   if (app.data.appliedDate.toDate().getMonth() === today.getMonth() && app.data.appliedDate.toDate().getDate() === today.getDate()) {
+        //     graphData.push(app.data.appliedDate.toDate());
+        //   }
+        // });
+
+
+        console.log("STUFF");
+        console.log(graphData);
+
         setApplicationData({
           applied: appData.filter(app => app.data.stage === "Applied").length,
           phonescreen: appData.filter(app => app.data.stage === "Phone Screen").length,
@@ -145,9 +181,6 @@ function Dashboard(props) {
     }]
   };
 
-  console.log("DATES");
-  console.log(dateList);
-
   return (
     <React.Fragment>
       <DashboardWrapper>
@@ -171,16 +204,16 @@ function Dashboard(props) {
                     loader={<Spinner />}
                     data={[
                       ["Number", "Apps"],
-                      [dateList[9], 1],
-                      [dateList[8], 1],
-                      [dateList[7], 1],
-                      [dateList[6], 1],
-                      [dateList[5], 2],
-                      [dateList[4], 2],
-                      [dateList[3], 1],
-                      [dateList[2], 2],
-                      [dateList[1], 1],
-                      [dateList[0], 3]
+                      [`${graphDates[9].getMonth() + 1}/${graphDates[9].getDate()}`, appsPerDay[9]],
+                      [`${graphDates[8].getMonth() + 1}/${graphDates[8].getDate()}`, appsPerDay[8]],
+                      [`${graphDates[7].getMonth() + 1}/${graphDates[7].getDate()}`, appsPerDay[7]],
+                      [`${graphDates[6].getMonth() + 1}/${graphDates[6].getDate()}`, appsPerDay[6]],
+                      [`${graphDates[5].getMonth() + 1}/${graphDates[5].getDate()}`, appsPerDay[5]],
+                      [`${graphDates[4].getMonth() + 1}/${graphDates[4].getDate()}`, appsPerDay[4]],
+                      [`${graphDates[3].getMonth() + 1}/${graphDates[3].getDate()}`, appsPerDay[3]],
+                      [`${graphDates[2].getMonth() + 1}/${graphDates[2].getDate()}`, appsPerDay[2]],
+                      [`${graphDates[1].getMonth() + 1}/${graphDates[1].getDate()}`, appsPerDay[1]],
+                      [`${graphDates[0].getMonth() + 1}/${graphDates[0].getDate()}`, appsPerDay[0]]
                     ]}
                     options={{
                       hAxis: {
