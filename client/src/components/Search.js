@@ -19,6 +19,21 @@ const SearchTron = styled(Jumbotron)`
   box-shadow: 1px 2px 2px black;
 `;
 
+const SearchButton = styled(Button)`
+  margin-left: 5px;
+  box-shadow: 1px 1px 1px black;
+`;
+
+const SearchInputJob = styled(Input)`
+  box-shadow: 1px 1px 1px black;
+  width: 70%
+`;
+
+const SearchInputLocation = styled(Input)`
+  box-shadow: 1px 1px 1px black;
+  width: 30%;
+`;
+
 function Search() {
 
   const SearchResults = styled.div`
@@ -48,9 +63,10 @@ function Search() {
         </HeaderTron>
         <SearchTron>
           <InputGroup>
-            <Input type="text" placeholder="Software Engineer..." />
+            <SearchInputJob type="text" name="searchJob" placeholder="Software Engineer..." />
+            <SearchInputLocation type="text" name="searchLocation" placeholder="Location" />
             <InputGroupAddon>
-              <Button color="warning" onClick={() => getSearchResults()}>Search</Button>
+              <SearchButton color="warning" onClick={() => getSearchResults()}>Search</SearchButton>
             </InputGroupAddon>
           </InputGroup>
         </SearchTron>
