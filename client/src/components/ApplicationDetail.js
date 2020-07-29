@@ -14,9 +14,8 @@ import StepLabel from "@material-ui/core/StepLabel";
 import styled from "styled-components";
 
 const AppTron = styled(Jumbotron)`
-  margin-top: 200px;
+  margin-top: 100px;
   box-shadow: 1px 2px 2px black;
-  min-height: 300px;
 `;
 
 const AppButton = styled(Button)`
@@ -26,6 +25,7 @@ const AppButton = styled(Button)`
 
 const CompanyInfo = styled.div`
   float: left;
+  width: 75%;
 `;
 
 const EditInfo = styled.div`
@@ -172,11 +172,14 @@ function ApplicationDetail(props) {
             <h3>{application.title}</h3>
             <h4>{application.company} - {application.location}</h4>
             <p>Applied: {application.appliedDate.toDate().toString()}</p>
+            <h4>Summary</h4>
+            <p>{application.summary}</p>
           </CompanyInfo>
           <EditInfo>
             <AppButton onClick={() => onClickingEdit()} color="warning">Edit</AppButton>
             <AppButton onClick={() => onClickingDelete(application.id)} color="danger">Delete</AppButton>
           </EditInfo>
+          <div style={{ "clear": "both" }}></div>
         </AppTron>
         <Row>
           <Col className="col-md-4">

@@ -8,7 +8,15 @@ import JobList from "./JobList";
 const axios = require("axios");
 
 const SearchContainer = styled(Container)`
-  padding-top: 200px;
+  padding-top: 100px;
+`;
+
+const HeaderTron = styled(Jumbotron)`
+  text-align: center;
+  background-color: #CED9E0;
+`
+const SearchTron = styled(Jumbotron)`
+  box-shadow: 1px 2px 2px black;
 `;
 
 function Search() {
@@ -35,15 +43,17 @@ function Search() {
   return (
     <React.Fragment>
       <SearchContainer>
-        <h2>Search for jobs</h2>
-        <Jumbotron>
+        <HeaderTron>
+          <h2>Search for jobs</h2>
+        </HeaderTron>
+        <SearchTron>
           <InputGroup>
             <Input type="text" placeholder="Software Engineer..." />
             <InputGroupAddon>
               <Button color="warning" onClick={() => getSearchResults()}>Search</Button>
             </InputGroupAddon>
           </InputGroup>
-        </Jumbotron>
+        </SearchTron>
 
         <SearchResults>
           {searchContent}

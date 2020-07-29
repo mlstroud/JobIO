@@ -25,7 +25,7 @@ const MyChart = styled(Chart)`
 `;
 
 const DashboardWrapper = styled.div`
-  padding-top: 200px;
+  padding-top: 100px;
 `;
 
 const AppCard = styled(Card)`

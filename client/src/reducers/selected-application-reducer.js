@@ -9,6 +9,7 @@ export default (state = null, action) => {
         company: application.company,
         location: application.location,
         appliedDate: application.appliedDate,
+        summary: application.summary,
         stage: application.stage,
         id: application.id
       };

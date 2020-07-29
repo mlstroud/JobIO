@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 
 const ManageTron = styled(Jumbotron)`
-  margin-top: 200px;
+  margin-top: 100px;
   box-shadow: 1px 2px 2px black;
 `;
 
