@@ -52,7 +52,7 @@ function Interview(props) {
     <React.Fragment>
       <InterviewCard onClick={() => onEditClick()}>
         <CardHeader>
-          <CardTitle>{props.date} - {props.time}</CardTitle>
+          <CardTitle><strong>{props.date} - {props.time}</strong></CardTitle>
         </CardHeader>
         <CardBody>
           <p>Type: {props.type}</p>
