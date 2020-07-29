@@ -24,9 +24,9 @@ function Splash(props) {
     color: white;
     margin: 0;
   `;
-
   const HeroButton = styled(Button)`
     margin: 10px;
+    box-shadow: 1px 1px 1px black;
   `;
 
   const Img = styled.img`
