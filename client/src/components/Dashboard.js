@@ -1,7 +1,6 @@
 import React from "react";
 import { Jumbotron, Container } from "reactstrap";
 import styled from "styled-components";
-import CanvasJSReact from "../canvasjs.react";
 import Chart from "react-google-charts";
 import { Spinner } from "reactstrap";
 import { Col, Row, Card } from "reactstrap";
