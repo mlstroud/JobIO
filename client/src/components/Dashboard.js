@@ -17,7 +17,6 @@ import IIcon from "@material-ui/icons/Group";
 const DashTron = styled(Jumbotron)`
   background-color: white;
   box-shadow: 1px 2px 2px black;
-  border-radius: 0 !important;
 `;
 
 const PhoneIcon = styled(PIcon)({
@@ -109,6 +108,8 @@ function Dashboard(props) {
           });
         });
 
+        appData.sort((a, b) => { return b.data.appliedDate.toDate() - a.data.appliedDate.toDate() });
+
         setApplications(appData);
 
         graphData = [
@@ -155,6 +156,9 @@ function Dashboard(props) {
             id: doc.id
           });
         });
+
+        interviewData.sort((a, b) => { return parseInt(a.data.date.split("/")[1]) - parseInt(b.data.date.split("/")[1]) });
+
         setInterviews(interviewData);
       }).catch((error) => {
         console.log(error.message);
@@ -168,6 +172,8 @@ function Dashboard(props) {
             id: doc.id
           });
         });
+
+        followupData.sort((a, b) => { return parseInt(a.data.date.split("/")[1]) - parseInt(b.data.date.split("/")[1]) });
         setFollowups(followupData);
       }).catch((error) => {
         console.log(error.message);
@@ -294,7 +300,9 @@ function Dashboard(props) {
             <Col className="col-md-3">
               <h4>Interviews</h4>
               {interviews !== null && interviews.filter((int, i) => i < 5).map((int) => {
-                return <IntCard onClick={() => props.onSelect(int.data.appId)}>
+                return <IntCard
+                  onClick={() => props.onSelect(int.data.appId)}
+                  style={{ "border": "1px solid #ffc107" }} >
                   {int.data.date} - {applications !== null && applications.filter((app) => app.id === int.data.appId)[0].data.company}
                 </IntCard>
               })}
@@ -302,7 +310,9 @@ function Dashboard(props) {
             <Col className="col-md-3">
               <h4>Follow Ups</h4>
               {followups !== null && followups.filter((fup, i) => i < 5).map((fup) => {
-                return <FollowUpCard onClick={() => props.onSelect(fup.data.appId)}>
+                return <FollowUpCard
+                  onClick={() => props.onSelect(fup.data.appId)}
+                  style={{ "border": "1px solid #007bff" }} >
                   {fup.data.date} - {applications !== null && applications.filter((app) => app.id === fup.data.appId)[0].data.company}
                 </FollowUpCard>
               })}

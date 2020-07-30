@@ -75,6 +75,7 @@ function ApplicationDetail(props) {
             id: doc.id
           });
         });
+        followUpData.sort((a, b) => { return parseInt(a.data.date.split("/")[1]) - parseInt(b.data.date.split("/")[1]) });
         setContacts(contactData);
       }).catch((error) => {
         console.log(error.message);
@@ -88,6 +89,7 @@ function ApplicationDetail(props) {
             id: doc.id
           });
         });
+        contactData.sort((a, b) => { return a.data.name.localeCompare(b.data.name) });
         setFollowUps(followUpData);
       }).catch((error) => {
         console.log(error.message);
@@ -100,6 +102,7 @@ function ApplicationDetail(props) {
             data: doc.data(),
             id: doc.id
           });
+          interviewData.sort((a, b) => { return parseInt(a.data.date.split("/")[1]) - parseInt(b.data.date.split("/")[1]) });
           setInterviews(interviewData);
         });
       }).catch((error) => {
