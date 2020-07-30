@@ -29,6 +29,26 @@ function Footer() {
   const ListItem = styled.li`
   `;
 
+  const ListLink = styled.a`
+  color: white;
+
+  &a:hover: {
+    color: white;
+  }
+
+  &active: {
+    color: white;
+  }
+
+  &visited: {
+    color: white;
+  }
+
+  &link: {
+    color: white;
+  }
+  `;
+
   const Copyright = styled.div`
     text-align: left;
     padding-left: 35%;
@@ -45,27 +65,22 @@ function Footer() {
             </Copyright>
           </Col>
           <Col md="6">
+
             <ListContainer>
               <FooterList>
-                <ListHeader>JobIO</ListHeader>
-                <ListItem>About</ListItem>
-                <ListItem>Register</ListItem>
-                <ListItem>Sign In</ListItem>
-              </FooterList>
-
-              <FooterList>
-                <ListHeader>Legal</ListHeader>
-                <ListItem>Test</ListItem>
-                <ListItem>Test</ListItem>
-              </FooterList>
-
-              <FooterList>
                 <ListHeader>Resources</ListHeader>
-                <ListItem>Indeed</ListItem>
-                <ListItem>LinkedIn</ListItem>
-                <ListItem>ZipRecruiter</ListItem>
+                <ListItem><ListLink href="https://www.indeeed.com" target="_blank">Indeed</ListLink></ListItem>
+                <ListItem><ListLink href="https://www.linkedin.com" target="_blank">LinkedIn</ListLink></ListItem>
+                <ListItem><ListLink href="https://www.ziprecruiter.com" target="_blank">ZipRecruiter</ListLink></ListItem>
+              </FooterList>
+              <FooterList>
+                <ListHeader>&nbsp;</ListHeader>
+                <ListItem><ListLink href="https://www.glassdoor.com" target="_blank">Glassdoor</ListLink></ListItem>
+                <ListItem><ListLink href="https://www.monster.com" target="_blank">Monster</ListLink></ListItem>
+                <ListItem><ListLink href="https://www.snagajob.com" target="_blank">Snagajob</ListLink></ListItem>
               </FooterList>
             </ListContainer>
+
           </Col>
         </Row>
       </FooterBar>

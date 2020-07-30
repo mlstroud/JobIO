@@ -7,15 +7,20 @@ import styled from "styled-components";
 function Applications(props) {
 
   const ApplicationsContainer = styled(Container)`
-    padding-top: 200px;
+    padding-top: 100px;
+  `;
+
+  const AppTron = styled(Jumbotron)`
+    text-align: center;
+    background-color: #CED9E0;
   `;
 
   return (
     <React.Fragment>
       <ApplicationsContainer>
-        <Jumbotron>
+        <AppTron>
           <h1>Applications</h1>
-        </Jumbotron>
+        </AppTron>
         <ApplicationList
           onClickEdit={props.onClickEdit}
           onSelectApplication={props.onSelectApplication}

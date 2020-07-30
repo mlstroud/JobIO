@@ -4,16 +4,13 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 /* GET search query and perform web scrape */
-router.get('/', async function (req, res, next) {
-  //const result = await axios.get("http://example.com");
-  const result = await axios.get(`https://www.indeed.com/jobs?q=Software+Engineer&l=`);
-  const $ = await cheerio.load(result.data);
+router.get('/job/:jobQuery/location/:locationQuery', async function (req, res, next) {
 
-  // let ans = "";
-  // $(".jobsearch-SerpJobCard").each((i, elem) => {
-  //   ans += $(elem).find(".title").text() + "<br>" + $(elem).find(".summary").text() + "<br>";
-  // })
-  // res.send(ans);
+  const jobQuery = req.params.jobQuery;
+  const locationQuery = req.params.locationQuery;
+
+  const result = await axios.get(`https://www.indeed.com/jobs?q=${jobQuery}&l=${locationQuery}`);
+  const $ = await cheerio.load(result.data);
 
   let scrapeData = [];
 
@@ -27,7 +24,6 @@ router.get('/', async function (req, res, next) {
     });
   })
 
-  console.log(scrapeData);
   res.send(scrapeData);
 });
 

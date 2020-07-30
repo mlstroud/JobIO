@@ -42,6 +42,7 @@ class PageControl extends React.Component {
           company: application.get("company"),
           location: application.get("location"),
           appliedDate: application.get("appliedDate"),
+          summary: application.get("summary"),
           stage: application.get("stage"),
           user: application.get("user"),
           id: application.id

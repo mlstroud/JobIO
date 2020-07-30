@@ -1,8 +1,29 @@
 import React from "react";
 import firebase from "firebase/app";
-import { Form, Button, Input } from "reactstrap";
+import { Container, Form, Button, Input, Label, Jumbotron } from "reactstrap";
 import { Redirect } from "react-router-dom";
 import { useState } from "react";
+import styled from "styled-components";
+
+const RegisterTron = styled(Jumbotron)`
+    margin-top: 100px;
+    box-shadow: 1px 2px 2px black;
+    width: 30%;
+`;
+
+const RegisterLabel = styled(Label)`
+  font-weight: bold;
+`;
+
+const RegisterContainer = styled(Container)`
+  display: flex;
+  justify-content: center;
+`;
+
+const RegisterButton = styled(Button)`
+  margin: 5px;
+  box-shadow: 1px 1px 1px black;
+`;
 
 function Register() {
 
@@ -28,18 +49,26 @@ function Register() {
   } else {
     return (
       <React.Fragment>
-        <h1>Register</h1>
-        <Form onSubmit={registerUser}>
-          <Input
-            type="text"
-            name="email"
-            placeholder="Email" />
-          <Input
-            type="password"
-            name="password"
-            placeholder="Password" />
-          <Button color="warning" type="submit">Register</Button>
-        </Form>
+        <RegisterContainer>
+          <RegisterTron>
+            <h3>Register</h3>
+            <hr />
+            <Form onSubmit={registerUser}>
+              <RegisterLabel for="email">Email</RegisterLabel>
+              <Input
+                type="text"
+                name="email"
+                placeholder="Email" />
+              <RegisterLabel for="password">Password</RegisterLabel>
+              <Input
+                type="password"
+                name="password"
+                placeholder="Password" />
+              <hr />
+              <RegisterButton color="warning" type="submit">Register</RegisterButton>
+            </Form>
+          </RegisterTron>
+        </RegisterContainer>
       </React.Fragment>
     );
   }

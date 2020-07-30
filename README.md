@@ -1,37 +1,44 @@
 # JobIO
 
-#### Epicodus Capstone Project - Last Updated July 17th, 2020
+#### Epicodus Capstone Project - Last Updated July 30th, 2020
 
 #### By _**Matt Stroud**_
 
-## Proposal
+## Description
+JobIO is a job application manager created to simplify your job search by increasing the efficiency of managing and tracking your application status, interviews, and follow ups.  
 
-| Minimum Features |
-|------------------|
-| Users can search for jbs |
-| App will webscrape job boards for data |
-| Users can save applied jobs to pipeline |
-| Users can view all applied jobs |
----
-|Tools, Frameworks, Libraries, Resources |
-|---------------------------------------|
-| FERN Stack |
-| Axios |
-| Cheerio |
----
-|Stretch Goals |
-|--------------|
-| Authentication / User Specific Data |
-| Clean, Responsive UI |
-| API Access |
-| Duplicate flagging |
-| Search Filtering |
-| Detailed statistics |
-| Hosting |
----
+Users can search for jobs on the site, which will display webscraped results from popular job boards. These jobs can be added to their pipeline, after which users can view detailed analytics, and easily manage their applications.
+
+## Screenshots
+![JobIO dashboard screenshot.](https://raw.githubusercontent.com/mlstroud/JobIO/styling/client/src/img/dashboard.png)
+
+![JobIO job search screenshot.](https://github.com/mlstroud/JobIO/blob/styling/client/src/img/search.png?raw=true)
+
+![JobIO interview editing screenshot.](https://github.com/mlstroud/JobIO/blob/styling/client/src/img/interview.png?raw=true)
+
 ## Component Diagram
 
 ![Component diagram for tap room application.](https://raw.githubusercontent.com/mlstroud/JobIO/master/componentdiagram.png)
+
+## Minimum Viable Product
+
+| |Features|
+|--|-------|
+| :heavy_check_mark: |Users can search for jobs |
+| :heavy_check_mark: |JobIO Webscrapes job boards for data |
+|:heavy_check_mark: | Users can add jobs to their pipeline |
+| :heavy_check_mark: |Users can view all tracked applications |
+
+## Stretch Goals
+
+| |Features |
+|--|-------|
+| :heavy_check_mark: |Authentication & Authorization |
+| :heavy_check_mark: |User specific data |
+| :heavy_check_mark: |Styled UI |
+| :heavy_check_mark: |Application Analytics |
+| |Result Filtering |
+| |Hosting |
 
 ## Setup/Installation Requirements
 
@@ -71,18 +78,13 @@ _Have a bug or an issue with this application? [Open a new issue](https://github
 
 ## Technologies Used
 
-* React
-*
-* JavaScript
-* JSX
-* Axios
-* Cheerio
-* Express
-* Firestore
-* Material-UI
-* HTML
-* CSS
-* Git
+| | | |
+|--|--|--|
+| React | JavaScript | Express |
+| Redux | JSX | Firestore |
+| Axios | Cheerio | CORS |
+| Google Charts | Reactstrap | Material-UI |
+| HTML | CSS | Git |
 
 ### License
 

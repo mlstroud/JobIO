@@ -6,27 +6,50 @@ import { Container, Jumbotron, Button } from "reactstrap";
 import { Form, Input } from "reactstrap";
 import { useFirestore } from "react-redux-firebase";
 import { useState, useEffect } from "react";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import { Card } from "reactstrap";
+import { Label, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Card, Row, Col } from "reactstrap";
+import Stepper from "@material-ui/core/Stepper";
+import Step from "@material-ui/core/Step";
+import StepLabel from "@material-ui/core/StepLabel";
+import AddIcon from "@material-ui/icons/AddBox";
 import styled from "styled-components";
 
 const AppTron = styled(Jumbotron)`
-  margin-top: 200px;
-  box-shadow: 1px 2x 2px black;
+  margin-top: 100px;
+  box-shadow: 1px 2px 2px black;
 `;
 
-const AppProgress = styled.ul`
-  li.active {
-    color: success;
-  }
-  li.active:before {
-    border-color: success;
-    background-color: success;
-  }
-  li.active + li:after {
-    background-color: success;
-  }
+const AppButton = styled(Button)`
+  margin: 5px;
+  box-shadow: 1px 1px 1px black;
 `;
+
+const CompanyInfo = styled.div`
+  float: left;
+  width: 75%;
+`;
+
+const NewIcon = styled(AddIcon)({
+  color: "#007bff",
+  cursor: "pointer"
+});
+
+const ModalLabel = styled(Label)`
+  font-weight: bold;
+`;
+
+const EditInfo = styled.div`
+  float: right;
+`;
+
+const AppStepper = styled(Stepper)({
+  "background-color": "#e9ecef !important",
+});
+
+
+const AppStep = styled(Step)({
+
+});
 
 function ApplicationDetail(props) {
   const { application, onClickingEdit, onClickingDelete } = props;
@@ -52,6 +75,7 @@ function ApplicationDetail(props) {
             id: doc.id
           });
         });
+        followUpData.sort((a, b) => { return parseInt(a.data.date.split("/")[1]) - parseInt(b.data.date.split("/")[1]) });
         setContacts(contactData);
       }).catch((error) => {
         console.log(error.message);
@@ -65,6 +89,7 @@ function ApplicationDetail(props) {
             id: doc.id
           });
         });
+        contactData.sort((a, b) => { return a.data.name.localeCompare(b.data.name) });
         setFollowUps(followUpData);
       }).catch((error) => {
         console.log(error.message);
@@ -77,6 +102,7 @@ function ApplicationDetail(props) {
             data: doc.data(),
             id: doc.id
           });
+          interviewData.sort((a, b) => { return parseInt(a.data.date.split("/")[1]) - parseInt(b.data.date.split("/")[1]) });
           setInterviews(interviewData);
         });
       }).catch((error) => {
@@ -127,44 +153,76 @@ function ApplicationDetail(props) {
     });
   }
 
+  let stages = {
+    "Applied": 1,
+    "Phone Screen": 2,
+    "Interview": 3,
+    "Offer": 4
+  }
+
   return (
     <React.Fragment>
       <Container>
         <AppTron>
-          <AppProgress>
-            <li>Test</li>
-            <li>Test</li>
-            <li>Test</li>
-          </AppProgress>
-          <h3>{application.title}</h3>
-          <h4>{application.company} - {application.location}</h4>
-          <p>Applied: {application.appliedDate.toDate().toString()}</p>
-          <p>Stage: {application.stage}</p>
-          <h3>Contact List</h3>
-          <Button onClick={() => setContactModal(true)}>Add Contact</Button>
-          <ContactList contacts={contacts} appId={application.id} />
-          <hr />
-          <h3>Follow Ups</h3>
-          <Button onClick={() => setFollowUpsModal(true)}>Add Follow Up</Button>
-          <FollowUpList followups={followUps} appId={application.id} />
-          <hr />
-          <h3>Interviews</h3>
-          <Button onClick={() => setInterviewModal(true)}>Add Interview</Button>
-          <InterviewList interviews={interviews} appId={application.id} />
-          <hr />
-          <Button onClick={() => onClickingEdit()}>Edit</Button>
-          <Button onClick={() => onClickingDelete(application.id)}>Delete</Button>
+          {application.stage !== "Denied" &&
+            <AppStepper activeStep={stages[application.stage]}>
+              <AppStep key={1}>
+                <StepLabel>Applied</StepLabel>
+              </AppStep>
+              <AppStep key={2}>
+                <StepLabel>Phone Screen</StepLabel>
+              </AppStep>
+              <AppStep key={3}>
+                <StepLabel>Interview</StepLabel>
+              </AppStep>
+              <AppStep key={4}>
+                <StepLabel>Offer</StepLabel>
+              </AppStep>
+            </AppStepper>}
+          {application.stage === "Denied" &&
+            <h4><font color="red">This application has been denied.</font></h4>
+          }
+          <CompanyInfo>
+            <h3>{application.title}</h3>
+            <h4>{application.company} - {application.location}</h4>
+            <p>Applied: {application.appliedDate.toDate().toString()}</p>
+            <h4>Summary</h4>
+            <p>{application.summary}</p>
+          </CompanyInfo>
+          <EditInfo>
+            <AppButton onClick={() => onClickingEdit()} color="warning">Edit</AppButton>
+            <AppButton onClick={() => onClickingDelete(application.id)} color="danger">Delete</AppButton>
+          </EditInfo>
+          <div style={{ "clear": "both" }}></div>
         </AppTron>
+        <Row>
+          <Col className="col-md-4">
+            <h4>Interviews <NewIcon onClick={() => setInterviewModal(!interviewModal)} /></h4>
+            <InterviewList interviews={interviews} appId={application.id} />
+          </Col>
+          <Col className="col-md-4">
+            <h4>Follow Ups <NewIcon onClick={() => setFollowUpsModal(!followUpsModal)} /></h4>
+            <FollowUpList followups={followUps} appId={application.id} />
+          </Col>
+          <Col className="col-md-4">
+            <h4>Contacts <NewIcon onClick={() => setContactModal(!contactModal)} /></h4>
+            <ContactList contacts={contacts} appId={application.id} />
+          </Col>
+        </Row>
       </Container>
 
       <Modal isOpen={contactModal} toggle={() => setContactModal(!contactModal)}>
         <ModalHeader toggle={() => setContactModal(!contactModal)}>Add Contact</ModalHeader>
         <ModalBody>
           <Form onSubmit={onAddContact}>
+            <ModalLabel for="name">Name</ModalLabel>
             <Input name="name" placeholder="name" />
+            <ModalLabel for="email">Email</ModalLabel>
             <Input name="email" placeholder="email" />
+            <ModalLabel for="phone">Phone</ModalLabel>
             <Input name="phone" placeholder="phone" />
-            <Button type="submit">Add Contact</Button>
+            <hr />
+            <AppButton type="submit" color="primary">Add Contact</AppButton>
           </Form>
         </ModalBody>
       </Modal>
@@ -172,13 +230,16 @@ function ApplicationDetail(props) {
         <ModalHeader toggle={() => setFollowUpsModal(!followUpsModal)}>Add Follow Up</ModalHeader>
         <ModalBody>
           <Form onSubmit={onAddFollowUp}>
+            <ModalLabel for="date">Date</ModalLabel>
             <Input name="date" placeholder="date" />
+            <ModalLabel for="contact">Contact</ModalLabel>
             <Input name="contact" type="select">
               {contacts !== null && contacts.map((contact) => {
                 return <option value={contact.id} key={contact.id}>{contact.data.name}</option>
               })}
             </Input>
-            <Button type="submit">Add Follow Up</Button>
+            <hr />
+            <AppButton type="submit" color="primary">Add Follow Up</AppButton>
           </Form>
         </ModalBody>
       </Modal>
@@ -186,15 +247,20 @@ function ApplicationDetail(props) {
         <ModalHeader toggle={() => setInterviewModal(!interviewModal)}>Add Interview</ModalHeader>
         <ModalBody>
           <Form onSubmit={onAddInterview}>
+            <ModalLabel for="date">Date</ModalLabel>
             <Input name="date" placeholder="date" />
+            <ModalLabel for="time">Time</ModalLabel>
             <Input name="time" placeholder="time" />
+            <ModalLabel for="type">Type</ModalLabel>
             <Input name="type" type="select">
               <option>Phone</option>
               <option>On Site</option>
               <option>Virtual</option>
             </Input>
+            <ModalLabel for="notes">Notes</ModalLabel>
             <Input name="notes" placeholder="notes" />
-            <Button type="submit">Add Interview</Button>
+            <hr />
+            <AppButton type="submit" color="primary">Add Interview</AppButton>
           </Form>
         </ModalBody>
       </Modal>
