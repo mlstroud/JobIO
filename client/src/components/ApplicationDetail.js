@@ -6,11 +6,12 @@ import { Container, Jumbotron, Button } from "reactstrap";
 import { Form, Input } from "reactstrap";
 import { useFirestore } from "react-redux-firebase";
 import { useState, useEffect } from "react";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Label, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { Card, Row, Col } from "reactstrap";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
+import AddIcon from "@material-ui/icons/AddBox";
 import styled from "styled-components";
 
 const AppTron = styled(Jumbotron)`
@@ -26,6 +27,14 @@ const AppButton = styled(Button)`
 const CompanyInfo = styled.div`
   float: left;
   width: 75%;
+`;
+
+const NewIcon = styled(AddIcon)`
+  cursor: pointer;
+`;
+
+const ModalLabel = styled(Label)`
+  font-weight: bold;
 `;
 
 const EditInfo = styled.div`
@@ -183,15 +192,15 @@ function ApplicationDetail(props) {
         </AppTron>
         <Row>
           <Col className="col-md-4">
-            <h4>Interviews</h4>
+            <h4>Interviews <NewIcon onClick={() => setInterviewModal(!interviewModal)} /></h4>
             <InterviewList interviews={interviews} appId={application.id} />
           </Col>
           <Col className="col-md-4">
-            <h4>Follow Ups</h4>
+            <h4>Follow Ups <NewIcon onClick={() => setFollowUpsModal(!followUpsModal)} /></h4>
             <FollowUpList followups={followUps} appId={application.id} />
           </Col>
           <Col className="col-md-4">
-            <h4>Contacts</h4>
+            <h4>Contacts <NewIcon onClick={() => setContactModal(!contactModal)} /></h4>
             <ContactList contacts={contacts} appId={application.id} />
           </Col>
         </Row>
@@ -201,10 +210,14 @@ function ApplicationDetail(props) {
         <ModalHeader toggle={() => setContactModal(!contactModal)}>Add Contact</ModalHeader>
         <ModalBody>
           <Form onSubmit={onAddContact}>
+            <ModalLabel for="name">Name</ModalLabel>
             <Input name="name" placeholder="name" />
+            <ModalLabel for="email">Email</ModalLabel>
             <Input name="email" placeholder="email" />
+            <ModalLabel for="phone">Phone</ModalLabel>
             <Input name="phone" placeholder="phone" />
-            <Button type="submit">Add Contact</Button>
+            <hr />
+            <AppButton type="submit" color="primary">Add Contact</AppButton>
           </Form>
         </ModalBody>
       </Modal>
@@ -212,13 +225,16 @@ function ApplicationDetail(props) {
         <ModalHeader toggle={() => setFollowUpsModal(!followUpsModal)}>Add Follow Up</ModalHeader>
         <ModalBody>
           <Form onSubmit={onAddFollowUp}>
+            <ModalLabel for="date">Date</ModalLabel>
             <Input name="date" placeholder="date" />
+            <ModalLabel for="contact">Contact</ModalLabel>
             <Input name="contact" type="select">
               {contacts !== null && contacts.map((contact) => {
                 return <option value={contact.id} key={contact.id}>{contact.data.name}</option>
               })}
             </Input>
-            <Button type="submit">Add Follow Up</Button>
+            <hr />
+            <AppButton type="submit" color="primary">Add Follow Up</AppButton>
           </Form>
         </ModalBody>
       </Modal>
@@ -226,15 +242,20 @@ function ApplicationDetail(props) {
         <ModalHeader toggle={() => setInterviewModal(!interviewModal)}>Add Interview</ModalHeader>
         <ModalBody>
           <Form onSubmit={onAddInterview}>
+            <ModalLabel for="date">Date</ModalLabel>
             <Input name="date" placeholder="date" />
+            <ModalLabel for="time">Time</ModalLabel>
             <Input name="time" placeholder="time" />
+            <ModalLabel for="type">Type</ModalLabel>
             <Input name="type" type="select">
               <option>Phone</option>
               <option>On Site</option>
               <option>Virtual</option>
             </Input>
+            <ModalLabel for="notes">Notes</ModalLabel>
             <Input name="notes" placeholder="notes" />
-            <Button type="submit">Add Interview</Button>
+            <hr />
+            <AppButton type="submit" color="primary">Add Interview</AppButton>
           </Form>
         </ModalBody>
       </Modal>
