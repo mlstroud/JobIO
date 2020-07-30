@@ -7,7 +7,11 @@
 ## Description
 JobIO is a job application manager created to simplify your job search by increasing the efficiency of managing and tracking your application status, interviews, and follow ups.  
 
----
+Users can search for jobs on the site, which will display webscraped results from popular job boards. These jobs can be added to their pipeline, after which users can view detailed analytics, and easily manage their applications.
+
+## Screenshots
+
+
 ## Component Diagram
 
 ![Component diagram for tap room application.](https://raw.githubusercontent.com/mlstroud/JobIO/master/componentdiagram.png)
