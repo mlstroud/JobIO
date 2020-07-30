@@ -9,6 +9,7 @@ const ContactCard = styled(Card)`
   box-shadow: 1px 2px 2px black;
   margin: 5px;
   cursor: pointer;
+  border-top: 2px solid #17a2b8;
 `;
 
 const ModalButton = styled(Button)`

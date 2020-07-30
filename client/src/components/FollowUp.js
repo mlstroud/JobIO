@@ -9,6 +9,7 @@ const FollowUpCard = styled(Card)`
   box-shadow: 1px 2px 2px black;
   margin: 5px;
   cursor: pointer;
+  border-top: 2px solid #007bff;
 `;
 
 const ModalButton = styled(Button)`
