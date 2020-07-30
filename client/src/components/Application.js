@@ -60,6 +60,8 @@ function Application(props) {
                 </Step>
               </AppStepper>
             }
+            {props.stage === "Denied" &&
+              <p><font color="red">This application has been denied.</font></p>}
             <h4>Summary</h4>
             <p>{props.summary}</p>
           </CardText>

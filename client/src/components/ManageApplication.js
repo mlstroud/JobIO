@@ -51,8 +51,63 @@ function ManageApplication(props) {
     return firestore.update({ collection: "applications", doc: application.id }, propsToUpdate);
   }
 
-  console.log("Manage");
-  console.log(props);
+  let optionList = [];
+  switch (application.stage) {
+    case "Applied":
+      optionList = [
+        <option selected="selected">Applied</option>,
+        <option>Phone Screen</option>,
+        <option>Interview</option>,
+        <option>Offer</option>,
+        <option>Denied</option>
+      ];
+      break;
+    case "Phone Screen":
+      optionList = [
+        <option>Applied</option>,
+        <option selected="selected">Phone Screen</option>,
+        <option>Interview</option>,
+        <option>Offer</option>,
+        <option>Denied</option>
+      ];
+      break;
+    case "Interview":
+      optionList = [
+        <option>Applied</option>,
+        <option>Phone Screen</option>,
+        <option selected="selected">Interview</option>,
+        <option>Offer</option>,
+        <option>Denied</option>
+      ];
+      break;
+    case "Offer":
+      optionList = [
+        <option>Applied</option>,
+        <option>Phone Screen</option>,
+        <option>Interview</option>,
+        <option selected="selected">Offer</option>,
+        <option>Denied</option>
+      ];
+      break;
+    case "Deniedd":
+      optionList = [
+        <option>Applied</option>,
+        <option>Phone Screen</option>,
+        <option>Interview</option>,
+        <option>Offer</option>,
+        <option selected="selected">Denied</option>
+      ];
+      break;
+    default:
+      optionList = [
+        <option selected="selected">Applied</option>,
+        <option>Phone Screen</option>,
+        <option>Interview</option>,
+        <option>Offer</option>,
+        <option>Denied</option>
+      ];
+  }
+
   return (
     <React.Fragment>
       <Container>
@@ -67,11 +122,7 @@ function ManageApplication(props) {
             <Input name="location" value={application.location} />
             <AppLabel forr="stage">Stage</AppLabel>
             <Input name="stage" type="select">
-              <option>Applied</option>
-              <option>Phone Screen</option>
-              <option>Interview</option>
-              <option>Offer</option>
-              <option>Denied</option>
+              {optionList.map((option) => { return option })}
             </Input>
             <AppButton type="submit" color="primary">Save</AppButton>
             <AppButton onClick={() => goBackToApp()} color="warning">Go Back</AppButton>

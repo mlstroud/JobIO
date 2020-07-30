@@ -67,7 +67,7 @@ function Search() {
     <React.Fragment>
       <SearchContainer>
         <HeaderTron>
-          <h2>Search for jobs</h2>
+          <h1>Search for jobs</h1>
         </HeaderTron>
         <SearchTron>
           <InputGroup>
