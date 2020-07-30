@@ -6,6 +6,7 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 
 const AppCard = styled(Card)`
+  border-top: 3px solid #007bff;
   box-shadow: 1px 2px 2px black;
   border-radius: 5px;
   margin: 10px;

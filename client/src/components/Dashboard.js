@@ -8,12 +8,37 @@ import { Col, Row, Card } from "reactstrap";
 import { useEffect, useState } from "react";
 import { firestore } from "firebase";
 import { useFirestore } from "react-redux-firebase";
+import PIcon from "@material-ui/icons/Phone";
+import OIcon from "@material-ui/icons/CheckCircle";
+import DIcon from "@material-ui/icons/Cancel";
+import AIcon from "@material-ui/icons/Subject";
+import IIcon from "@material-ui/icons/Group";
 
 const DashTron = styled(Jumbotron)`
   background-color: white;
   box-shadow: 1px 2px 2px black;
   border-radius: 0 !important;
 `;
+
+const PhoneIcon = styled(PIcon)({
+  color: "#007bff"
+});
+
+const OfferIcon = styled(OIcon)({
+  color: "#28a745"
+});
+
+const DeniedIcon = styled(DIcon)({
+  color: "#dc3545"
+});
+
+const InterviewIcon = styled(IIcon)({
+  color: "#ffc107"
+});
+
+const AppliedIcon = styled(AIcon)({
+  color: "#17a2b8"
+});
 
 const MyChart = styled(Chart)`
 
@@ -45,6 +70,10 @@ const FollowUpCard = styled(Card)`
   padding: 5px;
   font-weight: bold;
   cursor: pointer;
+`;
+
+const AppCardText = styled.div`
+  display: inline-block;
 `;
 
 function Dashboard(props) {
@@ -219,21 +248,27 @@ function Dashboard(props) {
               <h4>Recent Applications</h4>
               {applications !== null && applications.filter((app, i) => i < 5).map((app) => {
                 let appColor;
+                let appIcon;
                 switch (app.data.stage) {
                   case "Applied":
-                    appColor = "light";
+                    appColor = "#17a2b8";
+                    appIcon = <AppliedIcon />
                     break;
                   case "Phone Screen":
-                    appColor = "info";
+                    appColor = "#007bff";
+                    appIcon = <PhoneIcon />
                     break;
                   case "Interview":
-                    appColor = "success";
+                    appColor = "#ffc107";
+                    appIcon = <InterviewIcon />
                     break;
                   case "Offer":
-                    appColor = "warning";
+                    appColor = "#28a745";
+                    appIcon = <OfferIcon />
                     break;
                   case "Denied":
-                    appColor = "danger";
+                    appColor = "#dc3545";
+                    appIcon = <DeniedIcon />
                     break;
                   default:
                     appColor = "light";
@@ -242,8 +277,17 @@ function Dashboard(props) {
                 return <AppCard
                   onClick={() => props.onSelect(app.id)}
                   key={app.id}
-                  color={appColor}>
-                  {app.data.company} - {app.data.title}
+
+                  style={{ "border": `1px solid ${appColor}` }}
+                >
+                  <Row>
+                    <Col className="col-md-1">
+                      {appIcon}
+                    </Col>
+                    <Col className="col-md-11">
+                      {app.data.company} - {app.data.title}
+                    </Col>
+                  </Row>
                 </AppCard>
               })}
             </Col>

@@ -29,9 +29,10 @@ const CompanyInfo = styled.div`
   width: 75%;
 `;
 
-const NewIcon = styled(AddIcon)`
-  cursor: pointer;
-`;
+const NewIcon = styled(AddIcon)({
+  color: "#007bff",
+  cursor: "pointer"
+});
 
 const ModalLabel = styled(Label)`
   font-weight: bold;
@@ -41,13 +42,14 @@ const EditInfo = styled.div`
   float: right;
 `;
 
-const AppStepper = styled(Stepper)`
-  background-color: #e9ecef !important;
-`;
+const AppStepper = styled(Stepper)({
+  "background-color": "#e9ecef !important",
+});
 
-const AppStep = styled(Step)`
 
-`;
+const AppStep = styled(Step)({
+
+});
 
 function ApplicationDetail(props) {
   const { application, onClickingEdit, onClickingDelete } = props;

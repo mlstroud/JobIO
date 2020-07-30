@@ -5,6 +5,7 @@ import { Button, Card, CardBody, CardTitle, CardHeader, CardSubtitle, CardText }
 function Job(props) {
 
   const JobCard = styled(Card)`
+    border-top: 3px solid #007bff;
     text-align: left;
     background-color: #F5F8FA;
     margin-bottom: 10px;
