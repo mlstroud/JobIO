@@ -31,7 +31,7 @@ function ApplicationList(props) {
             id: doc.id
           });
         });
-
+        appData.sort((a, b) => { return b.data.appliedDate.toDate() - a.data.appliedDate.toDate() });
         setApplications(appData);
       }).catch((error) => {
         console.log(error.message);
