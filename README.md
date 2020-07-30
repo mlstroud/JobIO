@@ -56,12 +56,23 @@ cd merch-site
 cd client
 npm install
 ```
-4. Navigate to server directory and install required dependencies.
+4. Create a Firebase account and setup a firestore database for the app.
+5. Add a .env file to your client directory and populate it with your firestore information.
+```
+REACT_APP_FIREBASE_API_KEY="YOUR_API_KEY"
+REACT_APP_FIREBASE_AUTH_DOMAIN="YOUR_AUTH_DOMAIN"
+REACT_APP_FIREBASE_DATABASE_URL="YOUR_DATABASE_URL"
+REACT_APP_FIREBASE_PROJECT_ID="YOUR_PROJECT_ID"
+REACT_APP_FIREBASE_STORAGE_BUCKET="YOUR_STORAGE_BUCKET"
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID="YOUR_MESSAGING_SENDER_ID"
+REACT_APP_FIREBASE_APP_ID="YOUR_APP_ID"
+```
+6. Navigate to server directory and install required dependencies.
 ```
 cd server
 npm install
 ```
-5. Start the server and client applications (you should still be in the server directory at this point).
+7. Start the server and client applications (you should still be in the server directory at this point).
 ```
 npm start
 cd ..
