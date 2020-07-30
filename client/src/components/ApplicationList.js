@@ -31,14 +31,12 @@ function ApplicationList(props) {
             id: doc.id
           });
         });
+
         setApplications(appData);
       }).catch((error) => {
         console.log(error.message);
       });
   }, []);
-
-  //const applications = useSelector(state => state.firestore.ordered.applications);
-
 
   return (
     <React.Fragment>

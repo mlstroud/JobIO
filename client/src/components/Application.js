@@ -14,6 +14,7 @@ const AppCard = styled(Card)`
 
 const AppStepper = styled(Stepper)`
   background-color: white;
+  width: 100%;
 `;
 
 function Application(props) {

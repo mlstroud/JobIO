@@ -9,9 +9,6 @@ import { useEffect, useState } from "react";
 import { firestore } from "firebase";
 import { useFirestore } from "react-redux-firebase";
 
-const CanvasJS = CanvasJSReact.CanvasJS;
-const CanvasJSChart = CanvasJSReact.CanvasJSChart;
-
 const DashTron = styled(Jumbotron)`
   background-color: white;
   box-shadow: 1px 2px 2px black;
@@ -110,16 +107,6 @@ function Dashboard(props) {
 
         setAppsPerDay(graphData);
 
-        // appData.forEach((app) => {
-        //   if (app.data.appliedDate.toDate().getMonth() === today.getMonth() && app.data.appliedDate.toDate().getDate() === today.getDate()) {
-        //     graphData.push(app.data.appliedDate.toDate());
-        //   }
-        // });
-
-
-        console.log("STUFF");
-        console.log(graphData);
-
         setApplicationData({
           applied: appData.filter(app => app.data.stage === "Applied").length,
           phonescreen: appData.filter(app => app.data.stage === "Phone Screen").length,
@@ -158,29 +145,6 @@ function Dashboard(props) {
       });
   }, []);
 
-  const graphOptions = {
-    exportEnabled: true,
-    animationEnabled: true,
-    title: {
-      text: "Test Graph"
-    },
-    data: [{
-      type: "pie",
-      startAngle: 75,
-      toolTipContent: "<b>{label}</b>: {y}%",
-      showInLegend: "true",
-      legendText: "{label}",
-      indexLabelFontSize: 16,
-      indexLabel: "{label} - {y}%",
-      dataPoints: [
-        { y: 18, label: "Spagett" },
-        { y: 49, label: "Spooked Ya" },
-        { y: 9, label: "Cigarette Juice" },
-        { y: 24, label: "Spooked Ya Again" }
-      ]
-    }]
-  };
-
   return (
     <React.Fragment>
       <DashboardWrapper>
@@ -189,7 +153,6 @@ function Dashboard(props) {
         </Container>
         <Container>
           <DashTron>
-            {/* <CanvasJSChart options={graphOptions} /> */}
             <h4>Application Dashboard</h4>
             <hr />
             <Row>
