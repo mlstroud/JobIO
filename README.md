@@ -10,11 +10,11 @@ JobIO is a job application manager created to simplify your job search by increa
 Users can search for jobs on the site, which will display webscraped results from popular job boards. These jobs can be added to their pipeline, after which users can view detailed analytics, and easily manage their applications.
 
 ## Screenshots
-![JobIO dashboard screenshot.](https://raw.githubusercontent.com/mlstroud/JobIO/styling/client/src/img/dashboard.png)
+![JobIO dashboard screenshot.](https://raw.githubusercontent.com/mlstroud/JobIO/master/client/src/img/dashboard.png)
 
-![JobIO job search screenshot.](https://github.com/mlstroud/JobIO/blob/styling/client/src/img/search.png?raw=true)
+![JobIO job search screenshot.](https://github.com/mlstroud/JobIO/blob/master/client/src/img/search.png?raw=true)
 
-![JobIO interview editing screenshot.](https://github.com/mlstroud/JobIO/blob/styling/client/src/img/interview.png?raw=true)
+![JobIO interview editing screenshot.](https://github.com/mlstroud/JobIO/blob/master/client/src/img/interview.png?raw=true)
 
 ## Component Diagram
 
