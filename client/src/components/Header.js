@@ -24,42 +24,26 @@ function Header(props) {
   function viewPage(page) {
 
     const { dispatch } = props
-    let actionType;
 
     switch (page) {
       case "Dashboard":
-        actionType = "NO_SEARCH";
-        dispatch({ type: actionType });
-        actionType = "NO_MANAGE";
-        dispatch({ type: actionType });
-        actionType = "NO_APPLICATIONS";
-        dispatch({ type: actionType });
-        actionType = "DESELECT_APPLICATION";
+        dispatch({ type: "NO_SEARCH" });
+        dispatch({ type: "NO_MANAGE" });
+        dispatch({ type: "NO_APPLICATIONS" });
+        dispatch({ type: "DESELECT_APPLICATION" });
         break;
       case "Search":
-        actionType = "TOGGLE_SEARCH";
-        dispatch({ type: actionType });
-        actionType = "NO_MANAGE";
-        dispatch({ type: actionType });
-        actionType = "DESELECT_APPLICATION";
+        dispatch({ type: "TOGGLE_SEARCH" });
+        dispatch({ type: "NO_MANAGE" });
+        dispatch({ type: "DESELECT_APPLICATION" });
         break;
       case "Applications":
-        actionType = "VIEW_APPLICATIONS";
-        dispatch({ type: actionType });
-        actionType = "NO_MANAGE";
-        dispatch({ type: actionType });
-        actionType = "DESELECT_APPLICATION";
+        dispatch({ type: "VIEW_APPLICATIONS" });
+        dispatch({ type: "NO_MANAGE" });
+        dispatch({ type: "DESELECT_APPLICATION" });
         break;
       default:
     }
-
-    console.log(page);
-
-    let action = {
-      type: actionType
-    }
-
-    dispatch(action);
   }
 
   function userSignOut() {

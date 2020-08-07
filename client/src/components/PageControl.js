@@ -89,7 +89,6 @@ class PageControl extends React.Component {
     else {
       // if ((isLoaded(auth)) && (auth.currentUser !== null)) {
       if (this.props.isEditing) {
-        console.log(this.state.selected);
         this.state.currentPage = <ManageApplication
           onEditApplication={this.handleEditingApplication}
           application={this.props.selectedApplication}
