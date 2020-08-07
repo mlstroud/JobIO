@@ -9,7 +9,7 @@ router.get('/job/:jobQuery/location/:locationQuery', async function (req, res, n
   const jobQuery = req.params.jobQuery;
   const locationQuery = req.params.locationQuery;
 
-  const result = await axios.get(`https://www.indeed.com/jobs?q=${jobQuery}&l=${locationQuery}`);
+  const result = await axios.get(`https://www.indeed.com/jobs?q=${jobQuery}&l=${locationQuery}&sort=date`);
   const $ = await cheerio.load(result.data);
 
   let scrapeData = [];
