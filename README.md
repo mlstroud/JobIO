@@ -1,6 +1,6 @@
 # JobIO
 
-#### Epicodus Capstone Project - Last Updated July 30th, 2020
+#### Epicodus Capstone Project - Last Updated Aug 7th, 2020
 
 #### By _**Matt Stroud**_
 
